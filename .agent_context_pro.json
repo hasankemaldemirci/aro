@@ -1,6 +1,6 @@
 {
-  "projectName": "project-aro",
-  "version": "0.1.0",
+  "projectName": "@hasankemaldemirci/aro",
+  "version": "1.0.0",
   "framework": "Vanilla Node.js",
   "techStack": [
     "@types/jest",
@@ -11,7 +11,7 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-02-14T18:20:39.747Z",
+  "analyzedAt": "2026-02-14T18:21:56.428Z",
   "metrics": {
     "hasReadme": true,
     "readmeSize": 1886,
