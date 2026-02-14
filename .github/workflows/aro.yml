@@ -21,10 +21,11 @@ jobs:
 
       - run: npm install
       - run: npm run build
+      - run: npm test
 
       - name: Run ARO Audit & Update Badge
         run: |
-          node dist/bin/aro.js audit --threshold=80
+          node dist/bin/aro.js audit --threshold=100
           node dist/bin/aro.js badge --update
 
       - name: Commit and Push if README changed
