@@ -29,8 +29,8 @@ export function run(): void {
   if (score > 80) color = "brightgreen";
   else if (score > 60) color = "yellow";
 
-  // Use lighthouse logo for a professional audit feel
-  const badgeUrl = `https://img.shields.io/badge/ARO_Score-${score}%2F100-${color}?style=for-the-badge&logo=lighthouse&logoColor=white`;
+  // Simple, logo-less badge for a native look
+  const badgeUrl = `https://img.shields.io/badge/ARO_Score-${score}%2F100-${color}?style=for-the-badge`;
   const markdown = `[![ARO Score](${badgeUrl})](https://github.com/hasankemaldemirci/aro)`;
 
   if (shouldUpdate) {
