@@ -1,0 +1,28 @@
+{
+  "projectName": "agent-live-test",
+  "version": "1.0.0",
+  "framework": "Vanilla Node.js",
+  "techStack": [],
+  "entryPoints": [],
+  "analyzedAt": "2026-02-14T19:15:33.360Z",
+  "metrics": {
+    "hasReadme": false,
+    "readmeSize": 0,
+    "hasSrc": false,
+    "hasConfig": 1,
+    "largeFiles": 0,
+    "securityIssues": 0,
+    "blindSpots": [
+      "Missing README.md - AI Agents lack project high-level context.",
+      "Flat directory structure - Harder for AI to navigate."
+    ]
+  },
+  "score": 40,
+  "blindSpots": [
+    "Missing README.md - AI Agents lack project high-level context.",
+    "Flat directory structure - Harder for AI to navigate."
+  ],
+  "structure": {
+    "package.json": "file"
+  }
+}
