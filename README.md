@@ -3,11 +3,12 @@
 > "SEO for your code, optimized for AI Agents."
 
 [![ARO Score][aro-badge]][aro-url]
+[![NPM Version][npm-badge]][npm-url]
 [![CI/CD Status][audit-badge]][audit-url]
 [![MCP Status][mcp-badge]][mcp-url]
 
 ARO is a professional ecosystem designed to optimize your codebase for
-AI agents (Cursor, Windsurf, Devin). It minimizes the Hallucination Tax
+AI agents (Cursor, Windsurf, Devin). It eliminates the Hallucination Tax
 and ensures your code is understood by AI "instantly".
 
 ## ⚡ Quick Start
@@ -28,10 +29,38 @@ npm install -g agent-aro
 
 ## 🛠️ Usage
 
-- `aro audit`: Full AI-Readiness analysis and financial report.
-- `aro fix`: Automatically apply AI-SEO markers to complex files.
-- `aro rules`: Generate rules for Cursor, Windsurf, and Devin.
-- `aro mcp`: Start the ARO MCP Server for direct agent integration.
+### Audit & Analysis
+
+Deeply analyze your project structure and calculate AI financial debt.
+
+```bash
+npx agent-aro audit          # Standard audit
+npx agent-aro audit --silent # Output only the score (for CI/CD)
+```
+
+### AI-SEO Patching
+
+Automatically inject context markers into complex files to help AI navigate faster.
+
+```bash
+npx agent-aro fix
+```
+
+### Rule Generation
+
+Generate optimized configuration files for specific AI editors.
+
+```bash
+npx agent-aro rules          # Generates .cursorrules, .windsurfrules, etc.
+```
+
+### MCP Server
+
+Enable live integration so AI Agents can query your project structure directly.
+
+```bash
+npx agent-aro mcp            # Starts the MCP server
+```
 
 ## Key Features
 
@@ -60,6 +89,8 @@ MIT (c) Hasan Kemal Demirci
 
 [aro-badge]: https://img.shields.io/badge/ARO_Score-100%2F100-brightgreen
 [aro-url]: https://github.com/hasankemaldemirci/aro
+[npm-badge]: https://img.shields.io/npm/v/agent-aro?color=red
+[npm-url]: https://www.npmjs.com/package/agent-aro
 [audit-badge]: https://github.com/hasankemaldemirci/aro/actions/workflows/aro.yml/badge.svg
 [audit-url]: https://github.com/hasankemaldemirci/aro/actions
 [mcp-badge]: https://img.shields.io/badge/MCP-Compatible-orange

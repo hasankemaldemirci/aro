@@ -11,10 +11,10 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-02-14T19:13:51.344Z",
+  "analyzedAt": "2026-02-14T19:18:26.671Z",
   "metrics": {
     "hasReadme": true,
-    "readmeSize": 2126,
+    "readmeSize": 2708,
     "hasSrc": true,
     "hasConfig": 4,
     "largeFiles": 0,
@@ -38,6 +38,12 @@
       "aro.ts": "file"
     },
     "eslint.config.mjs": "file",
+    "live_test_agent": {
+      "package.json": "file"
+    },
+    "live_test_new": {
+      "package.json": "file"
+    },
     "package-lock.json": "file",
     "package.json": "file",
     "src": {
