@@ -59,7 +59,7 @@ describe("ARO Enterprise Analytics", () => {
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
-    expect(debt.structuralDebt).toBe(20000); // 10000 (no src) + (4 * 2500) (no configs)
+    expect(debt.structuralDebt).toBe(20000); // 10000 (no src) + (2 * 5000) (missing 2 configs)
   });
 
   test("should handle partial configurations", () => {
@@ -73,6 +73,6 @@ describe("ARO Enterprise Analytics", () => {
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
-    expect(debt.structuralDebt).toBe(5000); // (4-2) * 2500
+    expect(debt.structuralDebt).toBe(0); // Target met with 2 configs
   });
 });

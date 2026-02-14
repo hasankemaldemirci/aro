@@ -25,8 +25,10 @@ export function calculateDebt(
 
   let structuralDebt = 0;
   if (!m.hasSrc) structuralDebt += 10000;
-  const missingConfigs = 4 - Math.min(m.hasConfig, 4);
-  structuralDebt += missingConfigs * 2500;
+  // Align with Score: Score gives max points for 2 config files.
+  const configRequirement = 2;
+  const missingConfigs = Math.max(0, configRequirement - m.hasConfig);
+  structuralDebt += missingConfigs * 5000;
 
   const tokenWasteDebt = m.largeFiles * interactions * 0.05;
 
