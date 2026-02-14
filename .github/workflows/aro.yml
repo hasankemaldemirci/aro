@@ -9,6 +9,8 @@ on:
 jobs:
   audit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
@@ -16,7 +18,18 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
+
       - run: npm install
       - run: npm run build
-      - name: Run ARO Audit (Self-Audit)
-        run: node dist/bin/aro.js audit --threshold=80
+
+      - name: Run ARO Audit & Update Badge
+        run: |
+          node dist/bin/aro.js audit --threshold=80
+          node dist/bin/aro.js badge --update
+
+      - name: Commit and Push if README changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: auto-update ARO Score badge" && git push)

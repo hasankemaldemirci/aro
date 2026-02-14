@@ -9,8 +9,6 @@
 import path from "path";
 import chalk from "chalk";
 
-// Detect execution environment (TS or Compiled JS)
-const isTS = __filename.endsWith(".ts");
 const BASE_PATH = path.join(__dirname, "../src");
 
 async function main() {
@@ -25,11 +23,15 @@ ${chalk.bold("Usage:")}
 ${chalk.bold("Commands:")}
   ${chalk.cyan("audit")}       Full analysis. Options: --rate=X --interactions=Y --threshold=Z --output=file.md
   ${chalk.cyan("fix")}         Automated AI-Readiness optimizations
-  ${chalk.cyan("badge")}       Generate a GitHub badge for your README
+  ${chalk.cyan("badge")}       Generate a GitHub badge for your README. Use --update to patch README.md
   ${chalk.cyan("rules")}       Generate .cursorrules for AI agents
   ${chalk.cyan("init-ci")}     Set up GitHub Actions for automated quality gate
   ${chalk.cyan("mcp")}         Start ARO MCP Server
   ${chalk.cyan("help")}        Show this help message
+
+${chalk.bold("Example:")}
+  aro audit --threshold=80
+  aro badge --update
 `;
 
   if (!command || command === "help") {
@@ -67,8 +69,7 @@ ${chalk.bold("Commands:")}
         break;
       }
       case "mcp": {
-        const mcp = await import(path.join(BASE_PATH, "mcp"));
-        // MCP usually runs its own server loop
+        await import(path.join(BASE_PATH, "mcp"));
         break;
       }
       default:

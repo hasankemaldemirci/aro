@@ -5,10 +5,13 @@ import { Branding } from "./constants";
 /**
  * @aro-context-marker
  * AI READABILITY NOTE: Badge generator for GitHub integration.
- * Produces a dynamic shield reflecting the AI-Readiness score.
+ * Supports --update flag to automatically patch README.md.
  */
 
 export function run(): void {
+  const args = process.argv.slice(2);
+  const shouldUpdate = args.includes("--update");
+
   const projectPath = process.cwd();
   const contextPath = path.join(projectPath, ".agent_context_pro.json");
 
@@ -28,6 +31,30 @@ export function run(): void {
 
   const badgeUrl = `https://img.shields.io/badge/ARO_Score-${score}%2F100-${color}?style=for-the-badge&logo=dependabot&logoColor=white`;
   const markdown = `[![ARO Score](${badgeUrl})](https://github.com/hasankemaldemirci/aro)`;
+
+  if (shouldUpdate) {
+    const readmePath = path.join(projectPath, "README.md");
+    if (fs.existsSync(readmePath)) {
+      let content = fs.readFileSync(readmePath, "utf8");
+      // Regex to find the ARO Score badge markdown and replace it
+      const badgeRegex =
+        /\[\!\[ARO Score\]\(https:\/\/img\.shields\.io\/badge\/ARO_Score-[^)]+\)\]\([^)]+\)/;
+
+      if (badgeRegex.test(content)) {
+        content = content.replace(badgeRegex, markdown);
+        fs.writeFileSync(readmePath, content);
+        console.log(
+          Branding.success("✅ README.md updated with latest ARO Score."),
+        );
+      } else {
+        console.log(
+          Branding.warning(
+            "⚠️  ARO Score badge not found in README.md. Skipping auto-update.",
+          ),
+        );
+      }
+    }
+  }
 
   console.log(Branding.border(""));
   console.log(Branding.cyan.bold("🛡️  ARO Badge Generator"));
