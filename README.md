@@ -77,6 +77,17 @@ ARO calculates the hidden costs of poor code readability for AI:
 - `src/init.ts`: CI/CD initialization
 - `src/rules.ts`: AI-agent ruleset generation
 
+## Contributing 🤝
+
+ARO is open-source and thrives on community contributions. Whether it's a new framework detector, improved scoring logic, or documentation fixes—we welcome all PRs!
+
+Please read our [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## Community & Support 🛰️
+
+- **Issues:** Report bugs or request features via [GitHub Issues](https://github.com/hasankemaldemirci/aro/issues).
+- **Vision:** Help us eliminate the "Hallucination Tax" globally.
+
 ## License
 
-MIT
+MIT © [Hasan Kemal Demirci](https://github.com/hasankemaldemirci)
