@@ -2,9 +2,9 @@ name: ARO Audit
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 
 jobs:
   audit:
@@ -14,8 +14,9 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-      - run: npm ci
-      - name: Run ARO Audit
-        run: npx @hasankemaldemirci/aro audit --threshold=80
+          node-version: "20"
+          cache: "npm"
+      - run: npm install
+      - run: npm run build
+      - name: Run ARO Audit (Self-Audit)
+        run: node dist/bin/aro.js audit --threshold=80
