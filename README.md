@@ -10,17 +10,28 @@ ARO is a professional ecosystem designed to optimize your codebase for
 AI agents (Cursor, Windsurf, Devin). It minimizes the Hallucination Tax
 and ensures your code is understood by AI "instantly".
 
-## Quick Start
+## ⚡ Quick Start
+
+Analyze any project instantly without installation:
 
 ```bash
-# Install and link
-npm install && npm run build && npm link
-
-# Usage
-aro audit      # Deep analysis & financial report
-aro fix        # Auto-apply AI-SEO markers
-aro rules      # Generate rules for multi-agent support
+npx @hasankemaldemirci/aro audit
 ```
+
+## 📦 Installation
+
+For frequent use, install ARO globally:
+
+```bash
+npm install -g @hasankemaldemirci/aro
+```
+
+## 🛠️ Usage
+
+- `aro audit`: Full AI-Readiness analysis and financial report.
+- `aro fix`: Automatically apply AI-SEO markers to complex files.
+- `aro rules`: Generate rules for Cursor, Windsurf, and Devin.
+- `aro mcp`: Start the ARO MCP Server for direct agent integration.
 
 ## Key Features
 
