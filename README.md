@@ -4,9 +4,9 @@
 
 > "SEO for your code, optimized for AI Agents."
 
-[![ARO Score](https://img.shields.io/badge/ARO_Score-100%2F100-brightgreen?style=for-the-badge)](https://github.com/hasankemaldemirci/aro)
-[![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-orange?style=for-the-badge)](https://modelcontextprotocol.io/)
-[![Audit Status](https://github.com/hasankemaldemirci/aro/actions/workflows/aro.yml/badge.svg?style=for-the-badge)](https://github.com/hasankemaldemirci/aro/actions)
+[![ARO Score](https://img.shields.io/badge/ARO_Score-100%2F100-brightgreen)](https://github.com/hasankemaldemirci/aro)
+[![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-orange)](https://modelcontextprotocol.io/)
+[![Audit Status](https://github.com/hasankemaldemirci/aro/actions/workflows/aro.yml/badge.svg)](https://github.com/hasankemaldemirci/aro/actions)
 
 ## Vision 🚀
 

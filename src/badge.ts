@@ -25,12 +25,12 @@ export function run(): void {
   const data = JSON.parse(fs.readFileSync(contextPath, "utf8"));
   const score = data.score;
 
-  let color = "red";
-  if (score > 80) color = "brightgreen";
-  else if (score > 60) color = "yellow";
+  let color = "brightgreen";
+  if (score < 60) color = "red";
+  else if (score < 85) color = "yellow";
 
-  // Simple, logo-less badge for a native look
-  const badgeUrl = `https://img.shields.io/badge/ARO_Score-${score}%2F100-${color}?style=for-the-badge`;
+  // Using standard 'flat' style to match GitHub native badges exactly
+  const badgeUrl = `https://img.shields.io/badge/ARO_Score-${score}%2F100-${color}`;
   const markdown = `[![ARO Score](${badgeUrl})](https://github.com/hasankemaldemirci/aro)`;
 
   if (shouldUpdate) {
