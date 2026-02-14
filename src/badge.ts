@@ -37,14 +37,20 @@ export function run(): void {
     const readmePath = path.join(projectPath, "README.md");
     if (fs.existsSync(readmePath)) {
       let content = fs.readFileSync(readmePath, "utf8");
-      const badgeRegex =
+      const inlineRegex =
         /\[\!\[ARO Score\]\(https:\/\/img\.shields\.io\/badge\/ARO_Score-[^)]+\)\]\([^)]+\)/;
+      const refRegex =
+        /^\[aro-badge\]: https:\/\/img\.shields\.io\/badge\/ARO_Score-[^\n]+/m;
 
-      if (badgeRegex.test(content)) {
-        content = content.replace(badgeRegex, markdown);
+      if (inlineRegex.test(content)) {
+        content = content.replace(inlineRegex, markdown);
+        fs.writeFileSync(readmePath, content);
+        console.log(Branding.success("✅ README.md updated (Inline Badge)."));
+      } else if (refRegex.test(content)) {
+        content = content.replace(refRegex, `[aro-badge]: ${badgeUrl}`);
         fs.writeFileSync(readmePath, content);
         console.log(
-          Branding.success("✅ README.md updated with latest ARO Score."),
+          Branding.success("✅ README.md updated (Reference Badge)."),
         );
       } else {
         console.log(

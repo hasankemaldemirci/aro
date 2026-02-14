@@ -3,10 +3,11 @@
 > "SEO for your code, optimized for AI Agents."
 
 [![ARO Score][aro-badge]][aro-url]
+[![Audit Status][audit-badge]][audit-url]
 [![MCP Status][mcp-badge]][mcp-url]
 
-ARO is a professional ecosystem designed to optimize your codebase for 
-AI agents (Cursor, Windsurf, Devin). It minimizes the Hallucination Tax 
+ARO is a professional ecosystem designed to optimize your codebase for
+AI agents (Cursor, Windsurf, Devin). It minimizes the Hallucination Tax
 and ensures your code is understood by AI "instantly".
 
 ## Quick Start
@@ -33,10 +34,10 @@ aro rules      # Generate rules for multi-agent support
 
 The score (0-100) is based on AI-Agent understanding efficiency:
 
-1.  **README Quality (30%):** Documentation depth and clarity.
-2.  **Directory Structure (20%):** Adherence to standard patterns.
-3.  **Configuration (20%):** Presence of essential rule files.
-4.  **Modularity (30%):** 300-line file limit enforcement.
+1. README Quality (30%): Documentation depth and clarity.
+2. Directory Structure (20%): Adherence to standard patterns.
+3. Configuration (20%): Presence of essential rule files.
+4. Modularity (30%): 300-line file limit enforcement.
 
 ---
 
@@ -48,5 +49,7 @@ MIT (c) Hasan Kemal Demirci
 
 [aro-badge]: https://img.shields.io/badge/ARO_Score-100%2F100-brightgreen
 [aro-url]: https://github.com/hasankemaldemirci/aro
+[audit-badge]: https://github.com/hasankemaldemirci/aro/actions/workflows/aro.yml/badge.svg
+[audit-url]: https://github.com/hasankemaldemirci/aro/actions
 [mcp-badge]: https://img.shields.io/badge/MCP-Compatible-orange
 [mcp-url]: https://modelcontextprotocol.io/
