@@ -1,6 +1,6 @@
 {
   "name": "agent-aro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Agent Readability Optimizer - Professional SEO for your code.",
   "main": "dist/src/core.js",
   "repository": {
