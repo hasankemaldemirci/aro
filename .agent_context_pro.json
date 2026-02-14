@@ -11,7 +11,7 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-02-14T22:35:31.022Z",
+  "analyzedAt": "2026-02-14T23:00:31.196Z",
   "metrics": {
     "hasReadme": true,
     "readmeSize": 2980,
@@ -26,6 +26,7 @@
   "structure": {
     ".env.example": "file",
     ".github": {
+      "FUNDING.yml": "file",
       "workflows": {
         "aro.yml": "file"
       }
