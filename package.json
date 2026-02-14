@@ -1,11 +1,8 @@
 {
-  "name": "@hasankemaldemirci/aro",
+  "name": "agent-aro",
   "version": "1.0.0",
   "description": "Agent Readability Optimizer - Professional SEO for your code.",
   "main": "dist/src/core.js",
-  "publishConfig": {
-    "access": "public"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hasankemaldemirci/aro.git"

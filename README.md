@@ -15,7 +15,7 @@ and ensures your code is understood by AI "instantly".
 Analyze any project instantly without installation:
 
 ```bash
-npx @hasankemaldemirci/aro audit
+npx agent-aro audit
 ```
 
 ## 📦 Installation
@@ -23,7 +23,7 @@ npx @hasankemaldemirci/aro audit
 For frequent use, install ARO globally:
 
 ```bash
-npm install -g @hasankemaldemirci/aro
+npm install -g agent-aro
 ```
 
 ## 🛠️ Usage

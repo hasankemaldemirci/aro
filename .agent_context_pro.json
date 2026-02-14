@@ -1,5 +1,5 @@
 {
-  "projectName": "@hasankemaldemirci/aro",
+  "projectName": "agent-aro",
   "version": "1.0.0",
   "framework": "Vanilla Node.js",
   "techStack": [
@@ -11,10 +11,10 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-02-14T19:08:13.011Z",
+  "analyzedAt": "2026-02-14T19:13:51.344Z",
   "metrics": {
     "hasReadme": true,
-    "readmeSize": 2152,
+    "readmeSize": 2126,
     "hasSrc": true,
     "hasConfig": 4,
     "largeFiles": 0,
