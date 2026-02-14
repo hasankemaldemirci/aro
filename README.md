@@ -1,6 +1,6 @@
 # 🛰️ ARO
 
-### **Agent Readability Optimizer**
+## **Agent Readability Optimizer**
 
 > "SEO for your code, optimized for AI Agents."
 
