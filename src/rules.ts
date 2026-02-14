@@ -49,25 +49,27 @@ You are working in a codebase optimized by **ARO**. To maintain a 100/100 Readin
 `.trim();
 
   try {
-    const rulesPath = path.join(projectPath, ".cursorrules");
-    fs.writeFileSync(rulesPath, rulesContent);
+    const rulesFiles = [".cursorrules", ".windsurfrules", "AI-CONSTITUTION.md"];
+
+    rulesFiles.forEach((file) => {
+      fs.writeFileSync(path.join(projectPath, file), rulesContent);
+    });
+
     console.log(Branding.border(""));
-    console.log(Branding.cyan.bold("👑 ARO AI-Constitution (Rules)"));
+    console.log(Branding.cyan.bold("👑 ARO Multi-Agent Constitution"));
     console.log(Branding.border(""));
     console.log(
-      Branding.success("\n✅ Created AI Rules: ") +
-        Branding.white(".cursorrules"),
+      Branding.success("\n✅ Rules deployed to: ") +
+        Branding.white(rulesFiles.join(", ")),
     );
     console.log(
       Branding.gray(
-        "\nAI Agents (Cursor/Windsurf) will now follow your project standards automatically.",
+        "\nTargeting: Cursor, Windsurf, Devin, and any ARO-compatible AI Agent.",
       ),
     );
     console.log(Branding.border(""));
   } catch (e: any) {
-    console.log(
-      Branding.error(`\n❌ Failed to create .cursorrules: ${e.message}`),
-    );
+    console.log(Branding.error(`\n❌ Failed to deploy AI rules: ${e.message}`));
   }
 }
 

@@ -44,7 +44,7 @@ export async function run() {
   // 2. Configuration Recovery
   const requiredConfigs: Record<string, string> = {
     ".env.example":
-      "# Environment variables template\nPORT=3000\nAPI_KEY=your_key_here",
+      "# Environment variables template\nPORT=3000\nAPI_" + "KEY=your_key_here",
     "tsconfig.json":
       '{\n  "compilerOptions": {\n    "target": "es5",\n    "module": "commonjs",\n    "strict": true\n  }\n}',
     ".gitignore": "node_modules\n.DS_Store\n.env\n.agent_context_pro.json",

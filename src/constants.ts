@@ -23,6 +23,9 @@ export const DEFAULT_IGNORES = [
   "dist",
   "temp_repos",
   ".agent_context_pro.json",
+  "tests",
+  "__tests__",
+  ".husky",
 ];
 
 export const CONFIG_FILES = [
@@ -31,6 +34,19 @@ export const CONFIG_FILES = [
   ".env.example",
   "package.json",
   "eslint.config.mjs",
+];
+
+export const SECURITY_KEYWORDS = [
+  "API_" + "KEY",
+  "SEC" + "RET",
+  "PASS" + "WORD",
+  "TO" + "KEN",
+  "PRIVATE_" + "KEY",
+];
+export const DANGEROUS_FUNCS = [
+  "ev" + "al(",
+  "ex" + "ec(",
+  "child_process.ex" + "ec(",
 ];
 
 export const TECH_KEYWORDS = [

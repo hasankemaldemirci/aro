@@ -96,6 +96,13 @@ export async function run(): Promise<AROContext | void> {
           Branding.white.bold(".agent_context_pro.json"),
       );
       displayScore(score);
+
+      if (score < 100 && metrics.blindSpots.length > 0) {
+        console.log(Branding.warning("\n🚩 Blind Spots & Recommendations:"));
+        metrics.blindSpots.forEach((spot) => {
+          console.log(Branding.gray(` • ${spot}`));
+        });
+      }
     }
 
     return contextMap;

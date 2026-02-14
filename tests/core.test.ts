@@ -1,4 +1,3 @@
-
 /**
  * @aro-context-marker
  * AI READABILITY NOTE: This file is monitored for AI-Readability.
@@ -59,6 +58,7 @@ describe("ARO Core Engine", () => {
         hasSrc: true,
         hasConfig: 4,
         largeFiles: 0,
+        securityIssues: 0,
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(100);
@@ -71,6 +71,7 @@ describe("ARO Core Engine", () => {
         hasSrc: true,
         hasConfig: 4,
         largeFiles: 0,
+        securityIssues: 0,
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(70);
@@ -83,6 +84,7 @@ describe("ARO Core Engine", () => {
         hasSrc: true,
         hasConfig: 4,
         largeFiles: 0,
+        securityIssues: 0,
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(85);
@@ -95,6 +97,7 @@ describe("ARO Core Engine", () => {
         hasSrc: false,
         hasConfig: 4,
         largeFiles: 0,
+        securityIssues: 0,
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(80);
@@ -107,10 +110,24 @@ describe("ARO Core Engine", () => {
         hasSrc: true,
         hasConfig: 4,
         largeFiles: 5,
+        securityIssues: 0,
         blindSpots: [],
       };
       const score = calculateScore(metrics);
       expect(score).toBe(75);
+    });
+
+    test("should penalize for security issues", () => {
+      const metrics = {
+        hasReadme: true,
+        readmeSize: 1000,
+        hasSrc: true,
+        hasConfig: 4,
+        largeFiles: 0,
+        securityIssues: 2,
+        blindSpots: [],
+      };
+      expect(calculateScore(metrics)).toBe(90); // 100 - (2 * 5)
     });
 
     test("should not go below 0", () => {
@@ -120,6 +137,7 @@ describe("ARO Core Engine", () => {
         hasSrc: false,
         hasConfig: 0,
         largeFiles: 20,
+        securityIssues: 10,
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(0);

@@ -9,6 +9,7 @@ export interface AROMetrics {
   hasSrc: boolean;
   hasConfig: number;
   largeFiles: number;
+  securityIssues: number;
   blindSpots: string[];
 }
 

@@ -9,6 +9,7 @@ describe("ARO Enterprise Analytics", () => {
       hasSrc: true,
       hasConfig: 4,
       largeFiles: 0,
+      securityIssues: 0,
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -25,6 +26,7 @@ describe("ARO Enterprise Analytics", () => {
       hasSrc: true,
       hasConfig: 4,
       largeFiles: 0,
+      securityIssues: 0,
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -39,6 +41,7 @@ describe("ARO Enterprise Analytics", () => {
       hasSrc: true,
       hasConfig: 4,
       largeFiles: 3,
+      securityIssues: 0,
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -52,6 +55,7 @@ describe("ARO Enterprise Analytics", () => {
       hasSrc: false,
       hasConfig: 0,
       largeFiles: 0,
+      securityIssues: 0,
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -65,6 +69,7 @@ describe("ARO Enterprise Analytics", () => {
       hasSrc: true,
       hasConfig: 2,
       largeFiles: 0,
+      securityIssues: 0,
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);

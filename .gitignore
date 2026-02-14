@@ -12,6 +12,12 @@ temp_repos/
 *REPORT.md
 *report.md
 test_output.txt
+.cursorrules
+.windsurfrules
+AI-CONSTITUTION.md
+
+# Husky
+.husky/_/
 
 # Environment / Secrets
 .env

@@ -2,7 +2,13 @@ import fs from "fs";
 import path from "path";
 import fg from "fast-glob";
 import { AROMetrics } from "./types";
-import { DEFAULT_IGNORES, CONFIG_FILES, TECH_KEYWORDS } from "./constants";
+import {
+  DEFAULT_IGNORES,
+  CONFIG_FILES,
+  TECH_KEYWORDS,
+  SECURITY_KEYWORDS,
+  DANGEROUS_FUNCS,
+} from "./constants";
 
 /**
  * @aro-context-marker
@@ -76,6 +82,7 @@ export function analyzeMetrics(
     hasSrc: false,
     hasConfig: 0,
     largeFiles: 0,
+    securityIssues: 0,
     blindSpots: [],
   };
 
@@ -111,14 +118,36 @@ export function analyzeMetrics(
 
   files.forEach((file) => {
     const content = fs.readFileSync(file, "utf8");
-    if (content.split("\n").length > 300) {
+    const lines = content.split("\n");
+
+    // Size check
+    if (lines.length > 300) {
       metrics.largeFiles++;
     }
+
+    // Security check (Basic detection for AI-gen risks)
+    SECURITY_KEYWORDS.forEach((key) => {
+      if (content.includes(key + "=") || content.includes(key + ":")) {
+        metrics.securityIssues++;
+      }
+    });
+
+    DANGEROUS_FUNCS.forEach((func) => {
+      if (content.includes(func)) {
+        metrics.securityIssues++;
+      }
+    });
   });
 
   if (metrics.largeFiles > 0) {
     metrics.blindSpots.push(
       `${metrics.largeFiles} large files detected - Causes 'Context Truncation'.`,
+    );
+  }
+
+  if (metrics.securityIssues > 0) {
+    metrics.blindSpots.push(
+      `${metrics.securityIssues} potential security/hallucination risks (hardcoded keys or dangerous functions) detected.`,
     );
   }
 
@@ -134,6 +163,10 @@ export function calculateScore(metrics: AROMetrics): number {
   if (metrics.hasSrc) score += 20;
   score += Math.min(metrics.hasConfig * 10, 20);
   score += Math.max(30 - metrics.largeFiles * 5, 0);
+
+  // Security Penalty: -5 per issue, caps at 20
+  score -= Math.min(metrics.securityIssues * 5, 20);
+
   return Math.max(0, Math.min(score, 100));
 }
 
