@@ -23,11 +23,11 @@ export function run(): void {
   const data: AROContext = JSON.parse(fs.readFileSync(contextPath, "utf8"));
 
   const rulesContent = `
-# Project ARO: AI Agent Constitutional Rules 🛰️
+# ARO: AI Agent Constitutional Rules 🛰️
 Version: ${data.version} | Framework: ${data.framework}
 
 ## Core Directives for the AI Agent
-You are working in a codebase optimized by **Project ARO**. To maintain a 100/100 Readiness Score:
+You are working in a codebase optimized by **ARO**. To maintain a 100/100 Readiness Score:
 
 1. **Modular Consistency:** NEVER create or expand files beyond 300 lines. If logic grows, refactor into smaller sub-modules immediately.
 2. **Context Retention:** Always refer to \`.agent_context_pro.json\` for the latest project structure and tech stack.

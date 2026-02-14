@@ -1,4 +1,3 @@
-
 /**
  * @aro-context-marker
  * AI READABILITY NOTE: This file is monitored for AI-Readability.
@@ -32,10 +31,10 @@ export async function run(): Promise<AROContext | void> {
 
   if (!isSilent) {
     console.log(Branding.border(""));
+    console.log(Branding.cyan.bold("🛰️  ARO") + Branding.gray(" | v2.1.0-TS"));
     console.log(
-      Branding.cyan.bold(`🛰️  Project ARO `) + Branding.gray(`| v2.1.0-TS`),
+      Branding.white('"SEO for your code, optimized for AI Agents."'),
     );
-    console.log(Branding.gray(`"SEO for your code, optimized for AI Agents."`));
     console.log(Branding.border(""));
   }
 

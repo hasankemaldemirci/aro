@@ -1,10 +1,12 @@
-# Project ARO (Agent Readability Optimizer) 🛰️
+# 🛰️ ARO
+
+### **Agent Readability Optimizer**
+
+> "SEO for your code, optimized for AI Agents."
 
 [![ARO Score](https://img.shields.io/badge/ARO_Score-100%2F100-brightgreen?style=for-the-badge&logo=dependabot&logoColor=white)](https://github.com/hasankemaldemirci/aro)
 [![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-orange?style=for-the-badge&logo=openai&logoColor=white)](https://modelcontextprotocol.io/)
 [![Audit Status](https://img.shields.io/github/actions/workflow/status/hasankemaldemirci/aro/aro.yml?style=for-the-badge&logo=github&label=Audit)](https://github.com/hasankemaldemirci/aro/actions)
-
-**"SEO for your code, optimized for AI Agents."**
 
 ## Vision 🚀
 
