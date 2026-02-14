@@ -48,6 +48,17 @@ The `aro rules` command generates a specific instruction set for AI agents. This
 - Corrects its own hallucination risks.
 - Remains aware of the specific technologies detected in your tech-stack.
 
+## How is it Calculated? 🧮
+
+The ARO Score determines an AI agent's speed in understanding the codebase and the risk of errors (Hallucination Tax) based on 4 main criteria:
+
+1. **README Quality (30%):** Presence and level of detail in project documentation.
+2. **Directory Structure (20%):** Adherence to standard patterns like `src` or `app`.
+3. **Configuration Density (20%):** Presence of essential environment and rule files (tsconfig, jest, eslint, etc.).
+4. **Modularity (30%):** File size monitoring (files exceeding the 300-line limit reduce the score).
+
+> **Formula:** `Documentation + Structure + Configuration + Modularity = ARO Score (max 100)`
+
 ## AI Financial Analysis
 
 ARO calculates the hidden costs of poor code readability for AI:
