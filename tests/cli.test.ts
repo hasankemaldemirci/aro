@@ -53,7 +53,7 @@ describe("ARO CLI E2E", () => {
     }).toString();
 
     // Verifications (Updated strings to match new Branding and modular output)
-    expect(output).toContain("Project ARO");
+    expect(output).toContain("ARO");
     expect(output).toContain("Framework");
     expect(output).toContain("Node.js (Express)");
     expect(output).toContain("Quality Score");

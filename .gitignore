@@ -8,7 +8,6 @@ out/
 build/
 
 # ARO Artifacts & Temporary Files
-.agent_context_pro.json
 temp_repos/
 *REPORT.md
 *report.md

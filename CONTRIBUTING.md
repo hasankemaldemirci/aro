@@ -21,6 +21,7 @@ First off, thank you for considering contributing to ARO! It's people like you t
 3. Ensure the test suite passes (`npm test`).
 4. Run `aro audit` on your changes to ensure the AI-Readiness score remains at 100/100.
 5. Make sure your code lints.
+6. A **Husky pre-commit hook** is installed to automatically verify tests and ARO score before every commit.
 
 ## Style Guide
 

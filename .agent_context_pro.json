@@ -1,0 +1,85 @@
+{
+  "projectName": "project-aro",
+  "version": "0.1.0",
+  "framework": "Vanilla Node.js",
+  "techStack": [
+    "@types/jest",
+    "jest",
+    "ts-jest",
+    "typescript"
+  ],
+  "entryPoints": [
+    "bin/aro.ts"
+  ],
+  "analyzedAt": "2026-02-14T09:14:55.183Z",
+  "metrics": {
+    "hasReadme": true,
+    "readmeSize": 4105,
+    "hasSrc": true,
+    "hasConfig": 4,
+    "largeFiles": 0,
+    "blindSpots": []
+  },
+  "score": 100,
+  "blindSpots": [],
+  "structure": {
+    ".cursorrules": "file",
+    ".env.example": "file",
+    ".github": {
+      "workflows": {
+        "aro.yml": "file"
+      }
+    },
+    ".gitignore": "file",
+    ".husky": {
+      "_": {
+        ".gitignore": "file",
+        "applypatch-msg": "file",
+        "commit-msg": "file",
+        "h": "file",
+        "husky.sh": "file",
+        "post-applypatch": "file",
+        "post-checkout": "file",
+        "post-commit": "file",
+        "post-merge": "file",
+        "post-rewrite": "file",
+        "pre-applypatch": "file",
+        "pre-auto-gc": "file",
+        "pre-commit": "file",
+        "pre-merge-commit": "file",
+        "pre-push": "file",
+        "pre-rebase": "file",
+        "prepare-commit-msg": "file"
+      },
+      "pre-commit": "file"
+    },
+    "CONTRIBUTING.md": "file",
+    "LICENSE": "file",
+    "README.md": "file",
+    "bin": {
+      "aro.ts": "file"
+    },
+    "eslint.config.mjs": "file",
+    "package-lock.json": "file",
+    "package.json": "file",
+    "src": {
+      "badge.ts": "file",
+      "constants.ts": "file",
+      "core.ts": "file",
+      "enterprise.ts": "file",
+      "init.ts": "file",
+      "mcp.ts": "file",
+      "refactor.ts": "file",
+      "rules.ts": "file",
+      "types.ts": "file",
+      "utils.ts": "file"
+    },
+    "tests": {
+      "cli.test.ts": "file",
+      "core.test.ts": "file",
+      "enterprise.test.ts": "file",
+      "mcp.test.ts": "file"
+    },
+    "tsconfig.json": "file"
+  }
+}

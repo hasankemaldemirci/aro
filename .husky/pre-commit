@@ -1,0 +1,19 @@
+echo "🛰️  ARO Pre-commit Health Check..."
+
+# 1. Build the project
+npm run build || exit 1
+
+# 2. Run Unit Tests
+npm test || exit 1
+
+# 3. Enforce AI-Readiness (PRACTICE WHAT WE PREACH)
+# If score < 100, the commit will fail.
+node dist/bin/aro.js audit --threshold=100 || exit 1
+
+# 4. Sync metadata and badge
+node dist/bin/aro.js badge --update
+
+# 5. Staging the auto-updated metadata
+git add .agent_context_pro.json README.md
+
+echo "✅ ARO: Code is Elite and AI-Ready. Proceeding with commit..."
