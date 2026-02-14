@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+
+# Build Output
+dist/
+.next/
+out/
+build/
+
+# ARO Artifacts & Temporary Files
+.agent_context_pro.json
+temp_repos/
+*REPORT.md
+*report.md
+test_output.txt
+
+# Environment / Secrets
+.env
+.env.*
+!.env.example
+
+# Debug Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+logs/
+
+# System / OS
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.project
+.classpath
+.settings/
+
+# Testing
+coverage/
+junit.xml

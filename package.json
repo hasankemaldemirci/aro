@@ -1,0 +1,57 @@
+{
+  "name": "project-aro",
+  "version": "0.1.0",
+  "description": "Agent Readability Optimizer - SEO for your code.",
+  "main": "dist/src/core.js",
+  "bin": {
+    "aro": "dist/bin/aro.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "NODE_ENV=development ts-node bin/aro.ts",
+    "analyze": "ts-node src/enterprise.ts",
+    "mcp": "ts-node src/mcp.ts",
+    "test": "jest"
+  },
+  "keywords": [
+    "ai",
+    "agentic",
+    "debt",
+    "seo",
+    "readability",
+    "optimization",
+    "mcp"
+  ],
+  "author": "Hasan Kemal Demirci",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.1.0",
+    "chalk": "^4.1.2",
+    "fast-glob": "^3.2.11"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.13.4",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/temp_repos/",
+      "/dist/"
+    ],
+    "modulePathIgnorePatterns": [
+      "/temp_repos/",
+      "/dist/"
+    ],
+    "moduleNameMapper": {
+      "^@src/(.*)$": "<rootDir>/src/$1"
+    }
+  }
+}

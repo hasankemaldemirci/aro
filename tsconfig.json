@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "lib": ["ESNext"],
+    "declaration": true,
+    "outDir": "dist",
+    "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@bin/*": ["bin/*"]
+    },
+    "types": ["node", "jest"]
+  },
+  "include": ["src/**/*.ts", "bin/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules", "dist", "temp_repos"]
+}
