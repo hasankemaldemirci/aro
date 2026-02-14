@@ -29,14 +29,14 @@ export function run(): void {
   if (score > 80) color = "brightgreen";
   else if (score > 60) color = "yellow";
 
-  const badgeUrl = `https://img.shields.io/badge/ARO_Score-${score}%2F100-${color}?style=for-the-badge&logo=dependabot&logoColor=white`;
+  // Use lighthouse logo for a professional audit feel
+  const badgeUrl = `https://img.shields.io/badge/ARO_Score-${score}%2F100-${color}?style=for-the-badge&logo=lighthouse&logoColor=white`;
   const markdown = `[![ARO Score](${badgeUrl})](https://github.com/hasankemaldemirci/aro)`;
 
   if (shouldUpdate) {
     const readmePath = path.join(projectPath, "README.md");
     if (fs.existsSync(readmePath)) {
       let content = fs.readFileSync(readmePath, "utf8");
-      // Regex to find the ARO Score badge markdown and replace it
       const badgeRegex =
         /\[\!\[ARO Score\]\(https:\/\/img\.shields\.io\/badge\/ARO_Score-[^)]+\)\]\([^)]+\)/;
 
