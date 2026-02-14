@@ -54,6 +54,22 @@ Generate optimized configuration files for specific AI editors.
 npx agent-aro rules          # Generates .cursorrules, .windsurfrules, etc.
 ```
 
+### Badge Generation
+
+Generate an ARO Score badge and automatically patch your README.md.
+
+```bash
+npx agent-aro badge --update
+```
+
+### CI/CD Automation
+
+Initialize a GitHub Action to automatically audit your project on every push/PR.
+
+```bash
+npx agent-aro init-ci
+```
+
 ### MCP Server
 
 Enable live integration so AI Agents can query your project structure directly.

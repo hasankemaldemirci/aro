@@ -11,10 +11,10 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-02-14T19:28:20.854Z",
+  "analyzedAt": "2026-02-14T22:29:02.634Z",
   "metrics": {
     "hasReadme": true,
-    "readmeSize": 2708,
+    "readmeSize": 2980,
     "hasSrc": true,
     "hasConfig": 4,
     "largeFiles": 0,

@@ -14,24 +14,25 @@ const BASE_PATH = path.join(__dirname, "../src");
 async function main() {
   const command = process.argv[2];
   const helpText = `
-${chalk.bold.cyan("ARO - Agent Readability Optimizer")} (v2.1.0-TS)
+${chalk.bold.cyan("🛰️  agent-aro")} (v1.0.1)
 ${chalk.gray("Professional AI-Readiness Ecosystem")}
 
 ${chalk.bold("Usage:")}
-  aro <command> [options]
+  npx agent-aro <command> [options]
 
 ${chalk.bold("Commands:")}
-  ${chalk.cyan("audit")}       Full analysis. Options: --rate=X --interactions=Y --threshold=Z --output=file.md
-  ${chalk.cyan("fix")}         Automated AI-Readiness optimizations
-  ${chalk.cyan("badge")}       Generate a GitHub badge for your README. Use --update to patch README.md
-  ${chalk.cyan("rules")}       Generate .cursorrules for AI agents
-  ${chalk.cyan("init-ci")}     Set up GitHub Actions for automated quality gate
-  ${chalk.cyan("mcp")}         Start ARO MCP Server
+  ${chalk.cyan("audit")}       Full analysis & AI-Debt calculation. Options: --silent
+  ${chalk.cyan("fix")}         Automated AI-SEO patching for complex files
+  ${chalk.cyan("badge")}       Generate or update ARO Badge in your README (--update)
+  ${chalk.cyan("rules")}       Generate .cursorrules / .windsurfrules for AI Agents
+  ${chalk.cyan("init-ci")}     Set up GitHub Actions safety gate (ARO CI/CD)
+  ${chalk.cyan("mcp")}         Start ARO Model Context Protocol (MCP) Server
   ${chalk.cyan("help")}        Show this help message
 
 ${chalk.bold("Example:")}
-  aro audit --threshold=80
-  aro badge --update
+  npx agent-aro audit
+  npx agent-aro badge --update
+  npx agent-aro rules
 `;
 
   if (!command || command === "help") {
