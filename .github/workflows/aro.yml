@@ -1,4 +1,4 @@
-name: ARO Audit
+name: CI/CD
 
 on:
   push:
@@ -32,7 +32,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          # Check if README.md specifically has staged changes
           if ! git diff --cached --quiet; then
             git commit -m "docs: auto-update ARO Score badge"
             git push

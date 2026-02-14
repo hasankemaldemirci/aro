@@ -3,7 +3,7 @@
 > "SEO for your code, optimized for AI Agents."
 
 [![ARO Score][aro-badge]][aro-url]
-[![Audit Status][audit-badge]][audit-url]
+[![CI/CD Status][audit-badge]][audit-url]
 [![MCP Status][mcp-badge]][mcp-url]
 
 ARO is a professional ecosystem designed to optimize your codebase for
