@@ -21,7 +21,8 @@ export function calculateDebt(
   if (!m.hasReadme) docDebt = 15000;
   else if (m.readmeSize < 500) docDebt = 6000;
 
-  const truncationDebt = m.largeFiles * 5000;
+  let truncationDebt = m.largeFiles * 5000;
+  if (m.hasAIMap) truncationDebt = 0;
 
   let structuralDebt = 0;
   if (!m.hasSrc) structuralDebt += 10000;
@@ -30,7 +31,8 @@ export function calculateDebt(
   const missingConfigs = Math.max(0, configRequirement - m.hasConfig);
   structuralDebt += missingConfigs * 5000;
 
-  const tokenWasteDebt = m.largeFiles * interactions * 0.05;
+  let tokenWasteDebt = m.largeFiles * interactions * 0.05;
+  if (m.hasAIMap) tokenWasteDebt = 0;
 
   const totalDebt = docDebt + truncationDebt + structuralDebt + tokenWasteDebt;
   const wastedHours = totalDebt / rate;

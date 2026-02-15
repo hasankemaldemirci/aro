@@ -59,8 +59,25 @@ describe("ARO Core Engine", () => {
         hasConfig: 4,
         largeFiles: 0,
         securityIssues: 0,
+        hasAIMap: false,
         blindSpots: [],
       };
+      expect(calculateScore(metrics)).toBe(100);
+    });
+
+    test("should reward AI-Map compensation (+10 points)", () => {
+      const metrics = {
+        hasReadme: true,
+        readmeSize: 500,
+        hasSrc: true,
+        hasConfig: 2,
+        largeFiles: 2,
+        securityIssues: 0,
+        hasAIMap: true,
+        blindSpots: [],
+      };
+      // Base: Readme(30) + Src(20) + Config(20) + LargeFiles(30 - 2*5 = 20) = 90
+      // + AI-Map Compensation (10) = 100
       expect(calculateScore(metrics)).toBe(100);
     });
 
@@ -72,6 +89,7 @@ describe("ARO Core Engine", () => {
         hasConfig: 4,
         largeFiles: 0,
         securityIssues: 0,
+        hasAIMap: false,
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(70);
@@ -85,6 +103,7 @@ describe("ARO Core Engine", () => {
         hasConfig: 4,
         largeFiles: 0,
         securityIssues: 0,
+        hasAIMap: false,
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(85);
@@ -98,6 +117,7 @@ describe("ARO Core Engine", () => {
         hasConfig: 4,
         largeFiles: 0,
         securityIssues: 0,
+        hasAIMap: false,
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(80);
@@ -111,6 +131,7 @@ describe("ARO Core Engine", () => {
         hasConfig: 4,
         largeFiles: 5,
         securityIssues: 0,
+        hasAIMap: false,
         blindSpots: [],
       };
       const score = calculateScore(metrics);
@@ -125,6 +146,7 @@ describe("ARO Core Engine", () => {
         hasConfig: 4,
         largeFiles: 0,
         securityIssues: 2,
+        hasAIMap: false,
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(90); // 100 - (2 * 5)
@@ -138,6 +160,7 @@ describe("ARO Core Engine", () => {
         hasConfig: 0,
         largeFiles: 20,
         securityIssues: 10,
+        hasAIMap: false,
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(0);

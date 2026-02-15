@@ -83,6 +83,7 @@ export function analyzeMetrics(
     hasConfig: 0,
     largeFiles: 0,
     securityIssues: 0,
+    hasAIMap: false,
     blindSpots: [],
   };
 
@@ -103,6 +104,10 @@ export function analyzeMetrics(
     metrics.blindSpots.push(
       "Flat directory structure - Harder for AI to navigate.",
     );
+
+  metrics.hasAIMap = fs.existsSync(
+    path.join(projectPath, "AI-CONSTITUTION.md"),
+  );
 
   CONFIG_FILES.forEach((file) => {
     if (fs.existsSync(path.join(projectPath, file))) metrics.hasConfig++;
@@ -163,6 +168,9 @@ export function calculateScore(metrics: AROMetrics): number {
   if (metrics.hasSrc) score += 20;
   score += Math.min(metrics.hasConfig * 10, 20);
   score += Math.max(30 - metrics.largeFiles * 5, 0);
+
+  // Compensation: If file splitting isn't possible, an AI-Map provides context reconciliation
+  if (metrics.hasAIMap) score += 10;
 
   // Security Penalty: -5 per issue, caps at 20
   score -= Math.min(metrics.securityIssues * 5, 20);

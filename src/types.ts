@@ -10,6 +10,7 @@ export interface AROMetrics {
   hasConfig: number;
   largeFiles: number;
   securityIssues: number;
+  hasAIMap: boolean;
   blindSpots: string[];
 }
 

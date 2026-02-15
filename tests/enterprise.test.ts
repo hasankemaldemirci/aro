@@ -10,6 +10,7 @@ describe("ARO Enterprise Analytics", () => {
       hasConfig: 4,
       largeFiles: 0,
       securityIssues: 0,
+      hasAIMap: false,
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -27,6 +28,7 @@ describe("ARO Enterprise Analytics", () => {
       hasConfig: 4,
       largeFiles: 0,
       securityIssues: 0,
+      hasAIMap: false,
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -42,6 +44,7 @@ describe("ARO Enterprise Analytics", () => {
       hasConfig: 4,
       largeFiles: 3,
       securityIssues: 0,
+      hasAIMap: false,
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -56,6 +59,7 @@ describe("ARO Enterprise Analytics", () => {
       hasConfig: 0,
       largeFiles: 0,
       securityIssues: 0,
+      hasAIMap: false,
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -70,9 +74,27 @@ describe("ARO Enterprise Analytics", () => {
       hasConfig: 2,
       largeFiles: 0,
       securityIssues: 0,
+      hasAIMap: false,
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
     expect(debt.structuralDebt).toBe(0); // Target met with 2 configs
+  });
+
+  test("should zero out truncation debt when AI-Map is present", () => {
+    const metrics: AROMetrics = {
+      hasReadme: true,
+      readmeSize: 1000,
+      hasSrc: true,
+      hasConfig: 4,
+      largeFiles: 5, // High risk
+      securityIssues: 0,
+      hasAIMap: true, // Compensation
+      blindSpots: [],
+    };
+    const debt = calculateDebt(metrics);
+    expect(debt.truncationDebt).toBe(0);
+    expect(debt.tokenWasteDebt).toBe(0);
+    expect(debt.totalDebt).toBe(0); // README is also perfect
   });
 });

@@ -80,20 +80,22 @@ npx agent-aro mcp            # Starts the MCP server
 
 ## Key Features
 
-- **Deep Context Mapping:** Maps tech-stack and entry points for AI traversal.
-- **AI Financial Analysis:** Measures cost of documentation debt ($/hour).
-- **Multi-Agent Support:** Generates rules for Cursor, Windsurf, and Devin.
-- **Self-Healing:** Injects advisory markers into high-complexity files.
-- **MCP Server:** Live integration for AI Agents to query your structure.
+- **🎯 Real-time ARO Score**: Get a deterministic 0-100 rating of your code's AI-readiness.
+- **🗺️ AI World Map**: Automatically generates `AI-CONSTITUTION.md` for context compensation.
+- **🛠️ Elite Auto-Refactor**: Reach 100/100 score automatically via otonomous patching.
+- **💰 Financial Analyzer**: Calculate the annual "AI-Debt" in USD and wasted developer hours.
+- **🛰️ MCP Server**: Native integration for AI Agents to query your structure directly.
+- **🛡️ Security Gate**: Integrated security checks for keys and dangerous functions.
 
 ## Scoring Calculation
 
 The score (0-100) is based on AI-Agent understanding efficiency:
 
-1. README Quality (30%): Documentation depth and clarity.
-2. Directory Structure (20%): Adherence to standard patterns.
-3. Configuration (20%): Presence of essential rule files.
-4. Modularity (30%): 300-line file limit enforcement.
+1. **README Quality (30%)**: Documentation depth and clarity.
+2. **Directory Structure (20%)**: Adherence to standard patterns.
+3. **Configuration (20%)**: Presence of essential rule files.
+4. **Context Reconciliation (10%)**: Project Map availability (AI-CONSTITUTION.md).
+5. **Modularity (20%)**: 300-line file limit enforcement.
 
 ---
 
