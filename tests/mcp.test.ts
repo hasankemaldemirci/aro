@@ -17,6 +17,7 @@ describe("ARO MCP Server Integration", () => {
           output.includes("analyze_readability") &&
           output.includes("optimize_readability")
         ) {
+          clearTimeout(timeout);
           mcp.kill();
           done();
         }
@@ -41,11 +42,12 @@ describe("ARO MCP Server Integration", () => {
     });
 
     mcp.on("error", (err) => {
+      clearTimeout(timeout);
       done(err);
     });
 
     // Timeout safety
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       if (mcp.killed) return;
       mcp.kill();
       done(
@@ -63,6 +65,7 @@ describe("ARO MCP Server Integration", () => {
     mcp.stdout.on("data", (data) => {
       output += data.toString();
       if (output.includes("aro://current-metrics")) {
+        clearTimeout(timeout);
         mcp.kill();
         done();
       }
@@ -80,7 +83,7 @@ describe("ARO MCP Server Integration", () => {
       }
     });
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       if (mcp.killed) return;
       mcp.kill();
       done(new Error("MCP Server resource discovery failed"));

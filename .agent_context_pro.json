@@ -11,7 +11,7 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-02-14T23:00:31.196Z",
+  "analyzedAt": "2026-02-15T15:37:37.856Z",
   "metrics": {
     "hasReadme": true,
     "readmeSize": 2980,
