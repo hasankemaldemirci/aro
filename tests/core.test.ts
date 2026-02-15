@@ -7,6 +7,8 @@
  * @aro-context-marker
  * AI READABILITY NOTE: This file is monitored for AI-Readability.
  */
+import fs from "fs";
+import path from "path";
 import { detectFramework, calculateScore } from "../src/utils";
 
 describe("ARO Core Engine", () => {
@@ -109,7 +111,22 @@ describe("ARO Core Engine", () => {
       expect(calculateScore(metrics)).toBe(85);
     });
 
-    test("should penalize heavily for flat directory structure", () => {
+    test("should reward alternative structures (monorepo/cli/packages)", () => {
+      const metrics = {
+        hasReadme: true,
+        readmeSize: 1000,
+        hasSrc: true, // This will be set by the new logic in analyzeMetrics
+        hasConfig: 2,
+        largeFiles: 0,
+        securityIssues: 0,
+        hasAIMap: false,
+        blindSpots: [],
+      };
+      // Should give 100 even if it's not a standard 'src' folder (since analyzeMetrics now marks it true)
+      expect(calculateScore(metrics)).toBe(100);
+    });
+
+    test("should penalize truly unstructured projects (no src, packages, cli, or core)", () => {
       const metrics = {
         hasReadme: true,
         readmeSize: 1000,
@@ -120,7 +137,7 @@ describe("ARO Core Engine", () => {
         hasAIMap: false,
         blindSpots: [],
       };
-      expect(calculateScore(metrics)).toBe(80);
+      expect(calculateScore(metrics)).toBe(80); // Missing structure penalty
     });
 
     test("should penalize for large files (truncation debt)", () => {
@@ -164,6 +181,39 @@ describe("ARO Core Engine", () => {
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(0);
+    });
+  });
+
+  describe("analyzeMetrics - Structural Awareness Integration", () => {
+    const testDir = path.join(__dirname, "temp_test_project");
+
+    beforeEach(() => {
+      if (fs.existsSync(testDir)) fs.rmSync(testDir, { recursive: true });
+      fs.mkdirSync(testDir);
+    });
+
+    afterAll(() => {
+      if (fs.existsSync(testDir)) fs.rmSync(testDir, { recursive: true });
+    });
+
+    test("should recognize 'packages' folder as a valid source structure", () => {
+      fs.mkdirSync(path.join(testDir, "packages"));
+      fs.writeFileSync(path.join(testDir, "package.json"), "{}");
+      fs.writeFileSync(path.join(testDir, "README.md"), "# Test Project");
+
+      const { analyzeMetrics } = require("../src/utils");
+      const metrics = analyzeMetrics(testDir, []);
+      expect(metrics.hasSrc).toBe(true);
+    });
+
+    test("should recognize 'cli' folder as a valid source structure", () => {
+      fs.mkdirSync(path.join(testDir, "cli"));
+      fs.writeFileSync(path.join(testDir, "package.json"), "{}");
+      fs.writeFileSync(path.join(testDir, "README.md"), "# Test Project");
+
+      const { analyzeMetrics } = require("../src/utils");
+      const metrics = analyzeMetrics(testDir, []);
+      expect(metrics.hasSrc).toBe(true);
     });
   });
 });
