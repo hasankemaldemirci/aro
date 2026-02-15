@@ -99,10 +99,14 @@ export function analyzeMetrics(
 
   metrics.hasSrc =
     fs.existsSync(path.join(projectPath, "src")) ||
-    fs.existsSync(path.join(projectPath, "app"));
+    fs.existsSync(path.join(projectPath, "app")) ||
+    fs.existsSync(path.join(projectPath, "packages")) ||
+    fs.existsSync(path.join(projectPath, "cli")) ||
+    fs.existsSync(path.join(projectPath, "core"));
+
   if (!metrics.hasSrc)
     metrics.blindSpots.push(
-      "Flat directory structure - Harder for AI to navigate.",
+      "Unstructured project root - Harder for AI to traverse efficiently.",
     );
 
   metrics.hasAIMap = fs.existsSync(

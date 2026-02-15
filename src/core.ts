@@ -32,7 +32,7 @@ export async function run(): Promise<AROContext | void> {
   if (!isSilent) {
     console.log(Branding.border(""));
     console.log(
-      Branding.cyan.bold("🛰️  agent-aro") + Branding.gray(" | v1.0.4"),
+      Branding.cyan.bold("🛰️  agent-aro") + Branding.gray(" | v1.0.5"),
     );
     console.log(
       Branding.white('"SEO for your code, optimized for AI Agents."'),
