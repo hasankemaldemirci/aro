@@ -9,6 +9,7 @@
  */
 import fs from "fs";
 import path from "path";
+import chalk from "chalk";
 import { AROContext } from "./types";
 import { Branding } from "./constants";
 import {
@@ -98,6 +99,23 @@ export async function run(): Promise<AROContext | void> {
           Branding.white.bold(".agent_context_pro.json"),
       );
       displayScore(score);
+
+      if (metrics.contextFiles.length > 0) {
+        console.log(Branding.cyan("\n🛰️  Agent Context Files:"));
+        metrics.contextFiles.forEach((f) => {
+          const color =
+            f.score > 80
+              ? Branding.success
+              : f.score > 50
+                ? Branding.warning
+                : Branding.error;
+          console.log(
+            Branding.gray(` • ${f.name}`) +
+              chalk.gray(" - Quality: ") +
+              color(`${f.score}%`),
+          );
+        });
+      }
 
       if (score < 100 && metrics.blindSpots.length > 0) {
         console.log(Branding.warning("\n🚩 Blind Spots & Recommendations:"));

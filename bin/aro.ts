@@ -22,7 +22,7 @@ ${chalk.bold("Usage:")}
 
 ${chalk.bold("Commands:")}
   ${chalk.cyan("audit")}       Full analysis & AI-Debt calculation. Options: --silent
-  ${chalk.cyan("fix")}         Automated AI-SEO patching for complex files
+  ${chalk.cyan("refactor")}    Analyze large files and suggest intelligent splitting strategies
   ${chalk.cyan("badge")}       Generate or update ARO Badge in your README (--update)
   ${chalk.cyan("rules")}       Generate .cursorrules / .windsurfrules for AI Agents
   ${chalk.cyan("init-ci")}     Set up GitHub Actions safety gate (ARO CI/CD)
@@ -31,6 +31,7 @@ ${chalk.bold("Commands:")}
 
 ${chalk.bold("Example:")}
   npx @agent-aro/cli audit
+  aro refactor
   aro badge --update
   aro rules
 `;
@@ -49,7 +50,7 @@ ${chalk.bold("Example:")}
         await enterprise.run();
         break;
       }
-      case "fix": {
+      case "refactor": {
         const refactor = await import(path.join(BASE_PATH, "refactor"));
         await refactor.run();
         break;

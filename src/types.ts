@@ -11,6 +11,7 @@ export interface AROMetrics {
   largeFiles: number;
   securityIssues: number;
   hasAIMap: boolean;
+  contextFiles: { name: string; size: number; score: number }[];
   blindSpots: string[];
 }
 

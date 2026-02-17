@@ -62,24 +62,25 @@ describe("ARO Core Engine", () => {
         largeFiles: 0,
         securityIssues: 0,
         hasAIMap: false,
+        contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(100);
     });
 
-    test("should reward AI-Map compensation (+10 points)", () => {
+    test("should reward AI context files", () => {
       const metrics = {
         hasReadme: true,
         readmeSize: 500,
         hasSrc: true,
         hasConfig: 2,
-        largeFiles: 2,
+        largeFiles: 0,
         securityIssues: 0,
-        hasAIMap: true,
+        hasAIMap: false,
+        contextFiles: [{ name: "AGENTS.md", size: 600, score: 100 }],
         blindSpots: [],
       };
-      // Base: Readme(30) + Src(20) + Config(20) + LargeFiles(30 - 2*5 = 20) = 90
-      // + AI-Map Compensation (10) = 100
+      // README(25) + SRC(20) + Large(30) + Context(25) = 100
       expect(calculateScore(metrics)).toBe(100);
     });
 
@@ -92,9 +93,11 @@ describe("ARO Core Engine", () => {
         largeFiles: 0,
         securityIssues: 0,
         hasAIMap: false,
+        contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
       };
-      expect(calculateScore(metrics)).toBe(70);
+      // README(0) + SRC(20) + Bonus(5) + Large(30) + Context(25) = 80
+      expect(calculateScore(metrics)).toBe(80);
     });
 
     test("should penalize for small README (<500 chars)", () => {
@@ -106,23 +109,25 @@ describe("ARO Core Engine", () => {
         largeFiles: 0,
         securityIssues: 0,
         hasAIMap: false,
+        contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
       };
-      expect(calculateScore(metrics)).toBe(85);
+      // README(10) + SRC(20) + Bonus(5) + Large(30) + Context(25) = 90
+      expect(calculateScore(metrics)).toBe(90);
     });
 
     test("should reward alternative structures (monorepo/cli/packages)", () => {
       const metrics = {
         hasReadme: true,
         readmeSize: 1000,
-        hasSrc: true, // This will be set by the new logic in analyzeMetrics
-        hasConfig: 2,
+        hasSrc: true,
+        hasConfig: 4,
         largeFiles: 0,
         securityIssues: 0,
         hasAIMap: false,
+        contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
       };
-      // Should give 100 even if it's not a standard 'src' folder (since analyzeMetrics now marks it true)
       expect(calculateScore(metrics)).toBe(100);
     });
 
@@ -135,9 +140,11 @@ describe("ARO Core Engine", () => {
         largeFiles: 0,
         securityIssues: 0,
         hasAIMap: false,
+        contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
       };
-      expect(calculateScore(metrics)).toBe(80); // Missing structure penalty
+      // README(25) + SRC(0) + Bonus(5) + Large(30) + Context(25) = 85
+      expect(calculateScore(metrics)).toBe(85);
     });
 
     test("should penalize for large files (truncation debt)", () => {
@@ -149,10 +156,11 @@ describe("ARO Core Engine", () => {
         largeFiles: 5,
         securityIssues: 0,
         hasAIMap: false,
+        contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
       };
-      const score = calculateScore(metrics);
-      expect(score).toBe(75);
+      // README(25) + SRC(20) + Bonus(5) + Large(30 - 25 = 5) + Context(25) = 80
+      expect(calculateScore(metrics)).toBe(80);
     });
 
     test("should penalize for security issues", () => {
@@ -164,9 +172,11 @@ describe("ARO Core Engine", () => {
         largeFiles: 0,
         securityIssues: 2,
         hasAIMap: false,
+        contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
       };
-      expect(calculateScore(metrics)).toBe(90); // 100 - (2 * 5)
+      // 100 - (2 * 5) + 5 (config bonus) = 95
+      expect(calculateScore(metrics)).toBe(95);
     });
 
     test("should not go below 0", () => {
@@ -178,6 +188,7 @@ describe("ARO Core Engine", () => {
         largeFiles: 20,
         securityIssues: 10,
         hasAIMap: false,
+        contextFiles: [],
         blindSpots: [],
       };
       expect(calculateScore(metrics)).toBe(0);

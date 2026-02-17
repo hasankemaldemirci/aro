@@ -11,7 +11,7 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-02-17T11:18:28.482Z",
+  "analyzedAt": "2026-02-17T18:48:37.287Z",
   "metrics": {
     "hasReadme": true,
     "readmeSize": 3511,
@@ -20,6 +20,13 @@
     "largeFiles": 0,
     "securityIssues": 0,
     "hasAIMap": false,
+    "contextFiles": [
+      {
+        "name": "AGENTS.md",
+        "size": 2830,
+        "score": 100
+      }
+    ],
     "blindSpots": []
   },
   "score": 100,
@@ -33,6 +40,7 @@
       }
     },
     ".gitignore": "file",
+    "AGENTS.md": "file",
     "CONTRIBUTING.md": "file",
     "LICENSE": "file",
     "MIGRATION.md": "file",

@@ -8,6 +8,7 @@ import {
   TECH_KEYWORDS,
   SECURITY_KEYWORDS,
   DANGEROUS_FUNCS,
+  CONTEXT_FILES,
 } from "./constants";
 
 /**
@@ -84,6 +85,7 @@ export function analyzeMetrics(
     largeFiles: 0,
     securityIssues: 0,
     hasAIMap: false,
+    contextFiles: [],
     blindSpots: [],
   };
 
@@ -94,6 +96,44 @@ export function analyzeMetrics(
   } else {
     metrics.blindSpots.push(
       "Missing README.md - AI Agents lack project high-level context.",
+    );
+  }
+
+  // AI Context Files (AGENTS.md, .cursorrules etc)
+  CONTEXT_FILES.forEach((file) => {
+    const filePath = path.join(projectPath, file);
+    if (fs.existsSync(filePath)) {
+      const content = fs.readFileSync(filePath, "utf8");
+      let fileScore = 50; // Base score for existence
+      if (content.length > 500) fileScore += 20;
+      if (
+        content.toLowerCase().includes("rule") ||
+        content.toLowerCase().includes("instruction")
+      )
+        fileScore += 15;
+      if (
+        content.toLowerCase().includes("avoid") ||
+        content.toLowerCase().includes("always")
+      )
+        fileScore += 15;
+
+      metrics.contextFiles.push({
+        name: file,
+        size: content.length,
+        score: Math.min(fileScore, 100),
+      });
+
+      if (fileScore < 80) {
+        metrics.blindSpots.push(
+          `Low quality instructions in ${file} - Add more 'Always'/'Avoid' constraints to reduce agent confusion.`,
+        );
+      }
+    }
+  });
+
+  if (metrics.contextFiles.length === 0) {
+    metrics.blindSpots.push(
+      "No dedicated Agent instructions (AGENTS.md, .cursorrules) found.",
     );
   }
 
@@ -165,16 +205,33 @@ export function analyzeMetrics(
 
 export function calculateScore(metrics: AROMetrics): number {
   let score = 0;
+
+  // 1. Documentation Base (25pts)
   if (metrics.hasReadme) {
-    score += 15;
+    score += 10;
     if (metrics.readmeSize >= 500) score += 15;
   }
+
+  // 2. Structural Health (20pts)
   if (metrics.hasSrc) score += 20;
-  score += Math.min(metrics.hasConfig * 10, 20);
+
+  // 3. AI Debt / Truncation Risk (30pts)
   score += Math.max(30 - metrics.largeFiles * 5, 0);
 
-  // Compensation: If file splitting isn't possible, an AI-Map provides context reconciliation
-  if (metrics.hasAIMap) score += 10;
+  // 4. Agent Instructions & Context (25pts)
+  if (metrics.contextFiles.length > 0) {
+    const totalContextScore = metrics.contextFiles.reduce(
+      (acc, f) => acc + f.score,
+      0,
+    );
+    const avgContextScore = totalContextScore / metrics.contextFiles.length;
+    // We give points based on both presence and quality
+    score += Math.min(10 + avgContextScore * 0.15, 25);
+  }
+
+  // Bonus for Config & AI-Map
+  if (metrics.hasConfig > 3) score += 5;
+  if (metrics.hasAIMap) score += 5;
 
   // Security Penalty: -5 per issue, caps at 20
   score -= Math.min(metrics.securityIssues * 5, 20);

@@ -66,3 +66,13 @@ export const TECH_KEYWORDS = [
   "next",
   "vue",
 ];
+
+export const CONTEXT_FILES = [
+  "AGENTS.md",
+  ".cursorrules",
+  "CONVENTIONS.md",
+  "ARCHITECTURE.md",
+  "TECHSTACK.md",
+  ".windsurfrules",
+  "CLAUDE.md",
+];

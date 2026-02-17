@@ -11,6 +11,7 @@ describe("ARO Enterprise Analytics", () => {
       largeFiles: 0,
       securityIssues: 0,
       hasAIMap: false,
+      contextFiles: [],
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -29,6 +30,7 @@ describe("ARO Enterprise Analytics", () => {
       largeFiles: 0,
       securityIssues: 0,
       hasAIMap: false,
+      contextFiles: [],
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -45,6 +47,7 @@ describe("ARO Enterprise Analytics", () => {
       largeFiles: 3,
       securityIssues: 0,
       hasAIMap: false,
+      contextFiles: [],
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -60,6 +63,7 @@ describe("ARO Enterprise Analytics", () => {
       largeFiles: 0,
       securityIssues: 0,
       hasAIMap: false,
+      contextFiles: [],
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -75,6 +79,7 @@ describe("ARO Enterprise Analytics", () => {
       largeFiles: 0,
       securityIssues: 0,
       hasAIMap: false,
+      contextFiles: [],
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
@@ -90,6 +95,7 @@ describe("ARO Enterprise Analytics", () => {
       largeFiles: 5, // High risk
       securityIssues: 0,
       hasAIMap: true, // Compensation
+      contextFiles: [],
       blindSpots: [],
     };
     const debt = calculateDebt(metrics);
