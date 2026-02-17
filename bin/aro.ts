@@ -9,12 +9,13 @@
 import path from "path";
 import chalk from "chalk";
 
+const VERSION = "v2.1.0";
 const BASE_PATH = path.join(__dirname, "../src");
 
 async function main() {
   const command = process.argv[2];
   const helpText = `
-${chalk.bold.cyan("🛰️  @agent-aro/cli")} (v2.0.1)
+${chalk.bold.cyan("🛰️  @agent-aro/cli")} (${VERSION})
 ${chalk.gray("CLI toolkit for AI-ready codebases")}
 
 ${chalk.bold("Usage:")}
