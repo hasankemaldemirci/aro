@@ -1,6 +1,6 @@
 {
   "projectName": "@agent-aro/cli",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "framework": "Vanilla Node.js",
   "techStack": [
     "@types/jest",
@@ -11,7 +11,7 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-02-17T10:47:38.493Z",
+  "analyzedAt": "2026-02-17T11:18:28.482Z",
   "metrics": {
     "hasReadme": true,
     "readmeSize": 3511,

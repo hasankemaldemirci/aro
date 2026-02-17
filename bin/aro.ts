@@ -14,11 +14,11 @@ const BASE_PATH = path.join(__dirname, "../src");
 async function main() {
   const command = process.argv[2];
   const helpText = `
-${chalk.bold.cyan("🛰️  agent-aro")} (v1.0.7)
-${chalk.gray("Professional AI-Readiness Ecosystem")}
+${chalk.bold.cyan("🛰️  @agent-aro/cli")} (v2.0.1)
+${chalk.gray("CLI toolkit for AI-ready codebases")}
 
 ${chalk.bold("Usage:")}
-  npx agent-aro <command> [options]
+  npx @agent-aro/cli <command> [options]
 
 ${chalk.bold("Commands:")}
   ${chalk.cyan("audit")}       Full analysis & AI-Debt calculation. Options: --silent
@@ -30,9 +30,9 @@ ${chalk.bold("Commands:")}
   ${chalk.cyan("help")}        Show this help message
 
 ${chalk.bold("Example:")}
-  npx agent-aro audit
-  npx agent-aro badge --update
-  npx agent-aro rules
+  npx @agent-aro/cli audit
+  aro badge --update
+  aro rules
 `;
 
   if (!command || command === "help") {
