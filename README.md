@@ -7,7 +7,7 @@
 [![CI/CD Status][audit-badge]][audit-url]
 [![MCP Status][mcp-badge]][mcp-url]
 
-ARO is a professional ecosystem designed to optimize your codebase for
+ARO is a CLI toolkit designed to optimize your codebase for
 AI agents (Cursor, Windsurf, Devin). It eliminates the Hallucination Tax
 and ensures your code is understood by AI "instantly".
 
@@ -16,7 +16,9 @@ and ensures your code is understood by AI "instantly".
 Analyze any project instantly without installation:
 
 ```bash
-npx agent-aro audit
+npx @agent-aro/cli audit
+# or if installed globally
+aro audit
 ```
 
 ## 📦 Installation
@@ -24,7 +26,7 @@ npx agent-aro audit
 For frequent use, install ARO globally:
 
 ```bash
-npm install -g agent-aro
+npm install -g @agent-aro/cli
 ```
 
 ## 🛠️ Usage
@@ -34,8 +36,8 @@ npm install -g agent-aro
 Deeply analyze your project structure and calculate AI financial debt.
 
 ```bash
-npx agent-aro audit          # Standard audit
-npx agent-aro audit --silent # Output only the score (for CI/CD)
+aro audit          # Standard audit
+aro audit --silent # Output only the score (for CI/CD)
 ```
 
 ### AI-SEO Patching
@@ -43,7 +45,7 @@ npx agent-aro audit --silent # Output only the score (for CI/CD)
 Automatically inject context markers into complex files to help AI navigate faster.
 
 ```bash
-npx agent-aro fix
+aro fix
 ```
 
 ### Rule Generation
@@ -51,7 +53,7 @@ npx agent-aro fix
 Generate optimized configuration files for specific AI editors.
 
 ```bash
-npx agent-aro rules          # Generates .cursorrules, .windsurfrules, etc.
+aro rules          # Generates .cursorrules, .windsurfrules, etc.
 ```
 
 ### Badge Generation
@@ -59,7 +61,7 @@ npx agent-aro rules          # Generates .cursorrules, .windsurfrules, etc.
 Generate an ARO Score badge and automatically patch your README.md.
 
 ```bash
-npx agent-aro badge --update
+aro badge --update
 ```
 
 ### CI/CD Automation
@@ -67,7 +69,7 @@ npx agent-aro badge --update
 Initialize a GitHub Action to automatically audit your project on every push/PR.
 
 ```bash
-npx agent-aro init-ci
+aro init-ci
 ```
 
 ### MCP Server
@@ -75,8 +77,12 @@ npx agent-aro init-ci
 Enable live integration so AI Agents can query your project structure directly.
 
 ```bash
-npx agent-aro mcp            # Starts the MCP server
+aro mcp            # Starts the MCP server
 ```
+
+> **💡 Tip:** All commands work with `npx @agent-aro/cli` if you haven't installed globally.
+>
+> **🔌 Local LLMs:** ARO's MCP server works with local LLMs like Ollama and LM Studio. See [examples/mcp-local-llm](./examples/mcp-local-llm) for setup instructions.
 
 ## Key Features
 
@@ -107,8 +113,8 @@ MIT (c) Hasan Kemal Demirci
 
 [aro-badge]: https://img.shields.io/badge/ARO_Score-100%2F100-brightgreen
 [aro-url]: https://github.com/hasankemaldemirci/aro
-[npm-badge]: https://img.shields.io/npm/v/agent-aro?color=red
-[npm-url]: https://www.npmjs.com/package/agent-aro
+[npm-badge]: https://img.shields.io/npm/v/@agent-aro/cli?color=red
+[npm-url]: https://www.npmjs.com/package/@agent-aro/cli
 [audit-badge]: https://github.com/hasankemaldemirci/aro/actions/workflows/aro.yml/badge.svg
 [audit-url]: https://github.com/hasankemaldemirci/aro/actions
 [mcp-badge]: https://img.shields.io/badge/MCP-Compatible-orange

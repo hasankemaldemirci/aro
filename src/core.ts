@@ -32,7 +32,7 @@ export async function run(): Promise<AROContext | void> {
   if (!isSilent) {
     console.log(Branding.border(""));
     console.log(
-      Branding.cyan.bold("🛰️  agent-aro") + Branding.gray(" | v1.0.6"),
+      Branding.cyan.bold("🛰️  agent-aro") + Branding.gray(" | v1.0.7"),
     );
     console.log(
       Branding.white('"SEO for your code, optimized for AI Agents."'),
@@ -132,6 +132,11 @@ export function displayScore(score: number): void {
   if (score < 80) {
     console.log(
       Branding.warning(`\n⚠️  At Risk: High Hallucination Tax detected.`),
+    );
+  } else if (score >= 95) {
+    console.log(
+      Branding.gray(`\n⭐ Love your score? Star us: `) +
+        Branding.cyan("https://github.com/hasankemaldemirci/aro"),
     );
   }
 }

@@ -14,7 +14,7 @@ const BASE_PATH = path.join(__dirname, "../src");
 async function main() {
   const command = process.argv[2];
   const helpText = `
-${chalk.bold.cyan("🛰️  agent-aro")} (v1.0.6)
+${chalk.bold.cyan("🛰️  agent-aro")} (v1.0.7)
 ${chalk.gray("Professional AI-Readiness Ecosystem")}
 
 ${chalk.bold("Usage:")}

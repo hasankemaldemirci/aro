@@ -1,6 +1,6 @@
 {
-  "projectName": "agent-aro",
-  "version": "1.0.6",
+  "projectName": "@agent-aro/cli",
+  "version": "2.0.0",
   "framework": "Vanilla Node.js",
   "techStack": [
     "@types/jest",
@@ -11,10 +11,10 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-02-15T17:36:11.689Z",
+  "analyzedAt": "2026-02-17T10:47:38.493Z",
   "metrics": {
     "hasReadme": true,
-    "readmeSize": 3269,
+    "readmeSize": 3511,
     "hasSrc": true,
     "hasConfig": 4,
     "largeFiles": 0,
@@ -35,11 +35,25 @@
     ".gitignore": "file",
     "CONTRIBUTING.md": "file",
     "LICENSE": "file",
+    "MIGRATION.md": "file",
     "README.md": "file",
     "bin": {
       "aro.ts": "file"
     },
     "eslint.config.mjs": "file",
+    "examples": {
+      "README.md": "file",
+      "basic-audit": {
+        "README.md": "file"
+      },
+      "ci-integration": {
+        "README.md": "file"
+      },
+      "custom-rules": {},
+      "mcp-local-llm": {
+        "README.md": "file"
+      }
+    },
     "package-lock.json": "file",
     "package.json": "file",
     "src": {
