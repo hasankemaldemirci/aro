@@ -1,6 +1,6 @@
 {
   "name": "@agent-aro/cli",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Agent Readability Optimizer - CLI toolkit for AI-ready codebases.",
   "main": "dist/src/core.js",
   "repository": {
