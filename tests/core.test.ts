@@ -9,7 +9,8 @@
  */
 import fs from "fs";
 import path from "path";
-import { detectFramework, calculateScore } from "../src/utils";
+import { detectFramework } from "../src/utils";
+import { calculateScore, scoreReadmeContent } from "../src/scoring";
 
 describe("ARO Core Engine", () => {
   describe("detectFramework - Precision & Edge Cases", () => {
@@ -52,11 +53,58 @@ describe("ARO Core Engine", () => {
     });
   });
 
+  describe("scoreReadmeContent - Quality Analysis", () => {
+    test("should give full score for a comprehensive README", () => {
+      const content = `# My Project
+
+## Installation
+\`\`\`bash
+npm install my-project
+\`\`\`
+
+## Usage
+\`\`\`bash
+my-project --flag value
+\`\`\`
+
+## Configuration
+You can pass options and arguments to configure the tool.
+
+## Examples
+Here is an example of how to use the project.
+`;
+      expect(scoreReadmeContent(content)).toBe(100);
+    });
+
+    test("should give 0 for empty content", () => {
+      expect(scoreReadmeContent("")).toBe(0);
+    });
+
+    test("should give partial score for title-only README", () => {
+      const content = "# My Project\n";
+      expect(scoreReadmeContent(content)).toBe(15);
+    });
+
+    test("should detect installation keywords", () => {
+      const content = "# Proj\n\n## Getting Started\nRun npm install first.";
+      const score = scoreReadmeContent(content);
+      // title(15) + install(20) + 1 section(5) = 40
+      expect(score).toBe(40);
+    });
+
+    test("should reward code blocks", () => {
+      const content = "# Proj\n```bash\nnpm start\n```";
+      // title(15) + code block(20) = 35
+      expect(scoreReadmeContent(content)).toBe(35);
+    });
+  });
+
   describe("calculateScore - Logic Boundaries", () => {
     test("should give 100 for a perfect, well-documented project", () => {
       const metrics = {
         hasReadme: true,
         readmeSize: 1000,
+        readmeQualityScore: 100,
         hasSrc: true,
         hasConfig: 4,
         largeFiles: 0,
@@ -72,6 +120,7 @@ describe("ARO Core Engine", () => {
       const metrics = {
         hasReadme: true,
         readmeSize: 500,
+        readmeQualityScore: 100,
         hasSrc: true,
         hasConfig: 2,
         largeFiles: 0,
@@ -88,6 +137,7 @@ describe("ARO Core Engine", () => {
       const metrics = {
         hasReadme: false,
         readmeSize: 0,
+        readmeQualityScore: 0,
         hasSrc: true,
         hasConfig: 4,
         largeFiles: 0,
@@ -100,10 +150,11 @@ describe("ARO Core Engine", () => {
       expect(calculateScore(metrics)).toBe(80);
     });
 
-    test("should penalize for small README (<500 chars)", () => {
+    test("should give partial README score for low quality content", () => {
       const metrics = {
         hasReadme: true,
         readmeSize: 100,
+        readmeQualityScore: 0, // poor quality — only existence bonus
         hasSrc: true,
         hasConfig: 4,
         largeFiles: 0,
@@ -112,7 +163,7 @@ describe("ARO Core Engine", () => {
         contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
       };
-      // README(10) + SRC(20) + Bonus(5) + Large(30) + Context(25) = 90
+      // README(10 + 0) + SRC(20) + Bonus(5) + Large(30) + Context(25) = 90
       expect(calculateScore(metrics)).toBe(90);
     });
 
@@ -120,6 +171,7 @@ describe("ARO Core Engine", () => {
       const metrics = {
         hasReadme: true,
         readmeSize: 1000,
+        readmeQualityScore: 100,
         hasSrc: true,
         hasConfig: 4,
         largeFiles: 0,
@@ -135,6 +187,7 @@ describe("ARO Core Engine", () => {
       const metrics = {
         hasReadme: true,
         readmeSize: 1000,
+        readmeQualityScore: 100,
         hasSrc: false,
         hasConfig: 4,
         largeFiles: 0,
@@ -151,6 +204,7 @@ describe("ARO Core Engine", () => {
       const metrics = {
         hasReadme: true,
         readmeSize: 1000,
+        readmeQualityScore: 100,
         hasSrc: true,
         hasConfig: 4,
         largeFiles: 5,
@@ -167,6 +221,7 @@ describe("ARO Core Engine", () => {
       const metrics = {
         hasReadme: true,
         readmeSize: 1000,
+        readmeQualityScore: 100,
         hasSrc: true,
         hasConfig: 4,
         largeFiles: 0,
@@ -175,7 +230,7 @@ describe("ARO Core Engine", () => {
         contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
       };
-      // 100 - (2 * 5) + 5 (config bonus) = 95
+      // 100 - (2 * 5) = 95
       expect(calculateScore(metrics)).toBe(95);
     });
 
@@ -183,6 +238,7 @@ describe("ARO Core Engine", () => {
       const metrics = {
         hasReadme: false,
         readmeSize: 0,
+        readmeQualityScore: 0,
         hasSrc: false,
         hasConfig: 0,
         largeFiles: 20,
@@ -225,6 +281,30 @@ describe("ARO Core Engine", () => {
       const { analyzeMetrics } = require("../src/utils");
       const metrics = analyzeMetrics(testDir, []);
       expect(metrics.hasSrc).toBe(true);
+    });
+
+    test("should compute readmeQualityScore when README exists", () => {
+      fs.mkdirSync(path.join(testDir, "src"), { recursive: true });
+      fs.writeFileSync(path.join(testDir, "package.json"), "{}");
+      fs.writeFileSync(
+        path.join(testDir, "README.md"),
+        "# My Project\n\n## Installation\n```bash\nnpm install\n```\n\n## Usage\nRun the tool.",
+      );
+
+      const { analyzeMetrics } = require("../src/utils");
+      const metrics = analyzeMetrics(testDir, []);
+      expect(metrics.hasReadme).toBe(true);
+      expect(metrics.readmeQualityScore).toBeGreaterThan(0);
+    });
+
+    test("should set readmeQualityScore to 0 when README is missing", () => {
+      fs.mkdirSync(path.join(testDir, "src"), { recursive: true });
+      fs.writeFileSync(path.join(testDir, "package.json"), "{}");
+
+      const { analyzeMetrics } = require("../src/utils");
+      const metrics = analyzeMetrics(testDir, []);
+      expect(metrics.hasReadme).toBe(false);
+      expect(metrics.readmeQualityScore).toBe(0);
     });
   });
 });

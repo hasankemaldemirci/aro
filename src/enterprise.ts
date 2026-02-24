@@ -19,7 +19,8 @@ export function calculateDebt(
 
   let docDebt = 0;
   if (!m.hasReadme) docDebt = 15000;
-  else if (m.readmeSize < 500) docDebt = 6000;
+  else if (m.readmeQualityScore < 50) docDebt = 6000;
+  else if (m.readmeQualityScore < 75) docDebt = 3000;
 
   let truncationDebt = m.largeFiles * 5000;
   if (m.hasAIMap) truncationDebt = 0;

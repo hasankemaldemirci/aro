@@ -18,9 +18,9 @@ import {
   detectTechStack,
   findEntryPoints,
   analyzeMetrics,
-  calculateScore,
   getRepoStructure,
 } from "./utils";
+import { calculateScore } from "./scoring";
 
 /**
  * @aro-context-marker
@@ -99,6 +99,27 @@ export async function run(): Promise<AROContext | void> {
           Branding.white.bold(".agent_context_pro.json"),
       );
       displayScore(score);
+
+      if (metrics.hasReadme) {
+        const qScore = metrics.readmeQualityScore;
+        const qColor =
+          qScore >= 75
+            ? Branding.success
+            : qScore >= 50
+              ? Branding.warning
+              : Branding.error;
+        console.log(
+          Branding.white(`📄 README Quality: `) +
+            qColor.bold(`${qScore}/100`) +
+            Branding.gray(
+              qScore >= 75
+                ? " (AI-Ready)"
+                : qScore >= 50
+                  ? " (Needs Improvement)"
+                  : " (Poor - Agents lack context)",
+            ),
+        );
+      }
 
       if (metrics.contextFiles.length > 0) {
         console.log(Branding.cyan("\n🛰️  Agent Context Files:"));

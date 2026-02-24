@@ -19,6 +19,8 @@ import {
 
 export * from "./types";
 
+import { scoreReadmeContent } from "./scoring";
+
 export function loadIgnoreList(projectPath: string): string[] {
   const ignorePath = path.join(projectPath, ".aroignore");
   if (fs.existsSync(ignorePath)) {
@@ -80,6 +82,7 @@ export function analyzeMetrics(
   const metrics: AROMetrics = {
     hasReadme: false,
     readmeSize: 0,
+    readmeQualityScore: 0,
     hasSrc: false,
     hasConfig: 0,
     largeFiles: 0,
@@ -92,7 +95,14 @@ export function analyzeMetrics(
   const readmePath = path.join(projectPath, "README.md");
   if (fs.existsSync(readmePath)) {
     metrics.hasReadme = true;
-    metrics.readmeSize = fs.statSync(readmePath).size;
+    const readmeContent = fs.readFileSync(readmePath, "utf8");
+    metrics.readmeSize = Buffer.byteLength(readmeContent, "utf8");
+    metrics.readmeQualityScore = scoreReadmeContent(readmeContent);
+    if (metrics.readmeQualityScore < 50) {
+      metrics.blindSpots.push(
+        `Low-quality README (Score: ${metrics.readmeQualityScore}/100) - Add installation steps, code examples, and usage sections for better AI context.`,
+      );
+    }
   } else {
     metrics.blindSpots.push(
       "Missing README.md - AI Agents lack project high-level context.",
@@ -201,42 +211,6 @@ export function analyzeMetrics(
   }
 
   return metrics;
-}
-
-export function calculateScore(metrics: AROMetrics): number {
-  let score = 0;
-
-  // 1. Documentation Base (25pts)
-  if (metrics.hasReadme) {
-    score += 10;
-    if (metrics.readmeSize >= 500) score += 15;
-  }
-
-  // 2. Structural Health (20pts)
-  if (metrics.hasSrc) score += 20;
-
-  // 3. AI Debt / Truncation Risk (30pts)
-  score += Math.max(30 - metrics.largeFiles * 5, 0);
-
-  // 4. Agent Instructions & Context (25pts)
-  if (metrics.contextFiles.length > 0) {
-    const totalContextScore = metrics.contextFiles.reduce(
-      (acc, f) => acc + f.score,
-      0,
-    );
-    const avgContextScore = totalContextScore / metrics.contextFiles.length;
-    // We give points based on both presence and quality
-    score += Math.min(10 + avgContextScore * 0.15, 25);
-  }
-
-  // Bonus for Config & AI-Map
-  if (metrics.hasConfig > 3) score += 5;
-  if (metrics.hasAIMap) score += 5;
-
-  // Security Penalty: -5 per issue, caps at 20
-  score -= Math.min(metrics.securityIssues * 5, 20);
-
-  return Math.max(0, Math.min(score, 100));
 }
 
 export function getRepoStructure(

@@ -11,10 +11,11 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-02-17T21:10:52.177Z",
+  "analyzedAt": "2026-02-24T16:05:15.383Z",
   "metrics": {
     "hasReadme": true,
     "readmeSize": 3629,
+    "readmeQualityScore": 100,
     "hasSrc": true,
     "hasConfig": 4,
     "largeFiles": 0,
@@ -73,6 +74,7 @@
       "mcp.ts": "file",
       "refactor.ts": "file",
       "rules.ts": "file",
+      "scoring.ts": "file",
       "types.ts": "file",
       "utils.ts": "file"
     },

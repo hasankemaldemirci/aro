@@ -6,6 +6,7 @@ describe("ARO Enterprise Analytics", () => {
     const metrics: AROMetrics = {
       hasReadme: true,
       readmeSize: 1000,
+      readmeQualityScore: 100, // high quality
       hasSrc: true,
       hasConfig: 4,
       largeFiles: 0,
@@ -25,6 +26,7 @@ describe("ARO Enterprise Analytics", () => {
     const metrics: AROMetrics = {
       hasReadme: false,
       readmeSize: 0,
+      readmeQualityScore: 0,
       hasSrc: true,
       hasConfig: 4,
       largeFiles: 0,
@@ -38,10 +40,45 @@ describe("ARO Enterprise Analytics", () => {
     expect(debt.totalDebt).toBe(15000);
   });
 
+  test("should assign $6000 debt for low quality README (score < 50)", () => {
+    const metrics: AROMetrics = {
+      hasReadme: true,
+      readmeSize: 100,
+      readmeQualityScore: 15, // just a title, nothing else
+      hasSrc: true,
+      hasConfig: 4,
+      largeFiles: 0,
+      securityIssues: 0,
+      hasAIMap: false,
+      contextFiles: [],
+      blindSpots: [],
+    };
+    const debt = calculateDebt(metrics);
+    expect(debt.docDebt).toBe(6000);
+  });
+
+  test("should assign $3000 debt for mediocre README (score 50-74)", () => {
+    const metrics: AROMetrics = {
+      hasReadme: true,
+      readmeSize: 500,
+      readmeQualityScore: 60,
+      hasSrc: true,
+      hasConfig: 4,
+      largeFiles: 0,
+      securityIssues: 0,
+      hasAIMap: false,
+      contextFiles: [],
+      blindSpots: [],
+    };
+    const debt = calculateDebt(metrics);
+    expect(debt.docDebt).toBe(3000);
+  });
+
   test("should scale truncation debt with large files", () => {
     const metrics: AROMetrics = {
       hasReadme: true,
       readmeSize: 1000,
+      readmeQualityScore: 100,
       hasSrc: true,
       hasConfig: 4,
       largeFiles: 3,
@@ -58,6 +95,7 @@ describe("ARO Enterprise Analytics", () => {
     const metrics: AROMetrics = {
       hasReadme: true,
       readmeSize: 1000,
+      readmeQualityScore: 100,
       hasSrc: false,
       hasConfig: 0,
       largeFiles: 0,
@@ -74,6 +112,7 @@ describe("ARO Enterprise Analytics", () => {
     const metrics: AROMetrics = {
       hasReadme: true,
       readmeSize: 1000,
+      readmeQualityScore: 100,
       hasSrc: true,
       hasConfig: 2,
       largeFiles: 0,
@@ -90,6 +129,7 @@ describe("ARO Enterprise Analytics", () => {
     const metrics: AROMetrics = {
       hasReadme: true,
       readmeSize: 1000,
+      readmeQualityScore: 100,
       hasSrc: true,
       hasConfig: 4,
       largeFiles: 5, // High risk

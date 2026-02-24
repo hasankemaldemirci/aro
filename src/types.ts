@@ -6,6 +6,7 @@
 export interface AROMetrics {
   hasReadme: boolean;
   readmeSize: number;
+  readmeQualityScore: number;
   hasSrc: boolean;
   hasConfig: number;
   largeFiles: number;

@@ -52,7 +52,9 @@ describe("Context File Analysis", () => {
     expect(metrics.contextFiles[0].name).toBe(".cursorrules");
     expect(metrics.contextFiles[0].score).toBeLessThan(80);
     expect(metrics.blindSpots.length).toBeGreaterThan(0);
-    expect(metrics.blindSpots[0]).toContain("Low quality instructions");
+    expect(
+      metrics.blindSpots.some((s) => s.includes("Low quality instructions")),
+    ).toBe(true);
   });
 
   test("should detect multiple context files", () => {
