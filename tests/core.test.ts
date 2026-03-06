@@ -112,6 +112,8 @@ Here is an example of how to use the project.
         hasAIMap: false,
         contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
+        highComplexityFiles: 0,
+        anyTypeUsage: 0,
       };
       expect(calculateScore(metrics)).toBe(100);
     });
@@ -128,6 +130,8 @@ Here is an example of how to use the project.
         hasAIMap: false,
         contextFiles: [{ name: "AGENTS.md", size: 600, score: 100 }],
         blindSpots: [],
+        highComplexityFiles: 0,
+        anyTypeUsage: 0,
       };
       // README(25) + SRC(20) + Large(30) + Context(25) = 100
       expect(calculateScore(metrics)).toBe(100);
@@ -145,6 +149,8 @@ Here is an example of how to use the project.
         hasAIMap: false,
         contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
+        highComplexityFiles: 0,
+        anyTypeUsage: 0,
       };
       // README(0) + SRC(20) + Bonus(5) + Large(30) + Context(25) = 80
       expect(calculateScore(metrics)).toBe(80);
@@ -162,6 +168,8 @@ Here is an example of how to use the project.
         hasAIMap: false,
         contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
+        highComplexityFiles: 0,
+        anyTypeUsage: 0,
       };
       // README(10 + 0) + SRC(20) + Bonus(5) + Large(30) + Context(25) = 90
       expect(calculateScore(metrics)).toBe(90);
@@ -179,6 +187,8 @@ Here is an example of how to use the project.
         hasAIMap: false,
         contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
+        highComplexityFiles: 0,
+        anyTypeUsage: 0,
       };
       expect(calculateScore(metrics)).toBe(100);
     });
@@ -195,6 +205,8 @@ Here is an example of how to use the project.
         hasAIMap: false,
         contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
+        highComplexityFiles: 0,
+        anyTypeUsage: 0,
       };
       // README(25) + SRC(0) + Bonus(5) + Large(30) + Context(25) = 85
       expect(calculateScore(metrics)).toBe(85);
@@ -212,6 +224,8 @@ Here is an example of how to use the project.
         hasAIMap: false,
         contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
+        highComplexityFiles: 0,
+        anyTypeUsage: 0,
       };
       // README(25) + SRC(20) + Bonus(5) + Large(30 - 25 = 5) + Context(25) = 80
       expect(calculateScore(metrics)).toBe(80);
@@ -229,6 +243,8 @@ Here is an example of how to use the project.
         hasAIMap: false,
         contextFiles: [{ name: "AGENTS.md", size: 1000, score: 100 }],
         blindSpots: [],
+        highComplexityFiles: 0,
+        anyTypeUsage: 0,
       };
       // 100 - (2 * 5) = 95
       expect(calculateScore(metrics)).toBe(95);
@@ -246,6 +262,8 @@ Here is an example of how to use the project.
         hasAIMap: false,
         contextFiles: [],
         blindSpots: [],
+        highComplexityFiles: 0,
+        anyTypeUsage: 0,
       };
       expect(calculateScore(metrics)).toBe(0);
     });

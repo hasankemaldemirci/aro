@@ -11,7 +11,7 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-02-24T16:06:23.193Z",
+  "analyzedAt": "2026-03-06T21:56:10.216Z",
   "metrics": {
     "hasReadme": true,
     "readmeSize": 3629,
@@ -28,10 +28,18 @@
         "score": 100
       }
     ],
-    "blindSpots": []
+    "blindSpots": [
+      "2 highly complex files detected - Deeply nested logic confuses AI models.",
+      "Heavy usage of 'any' type (14 times) - Reduces TypeScript context for AI inference."
+    ],
+    "highComplexityFiles": 2,
+    "anyTypeUsage": 14
   },
   "score": 100,
-  "blindSpots": [],
+  "blindSpots": [
+    "2 highly complex files detected - Deeply nested logic confuses AI models.",
+    "Heavy usage of 'any' type (14 times) - Reduces TypeScript context for AI inference."
+  ],
   "structure": {
     ".env.example": "file",
     ".github": {
@@ -70,6 +78,7 @@
       "constants.ts": "file",
       "core.ts": "file",
       "enterprise.ts": "file",
+      "hooks.ts": "file",
       "init.ts": "file",
       "mcp.ts": "file",
       "refactor.ts": "file",

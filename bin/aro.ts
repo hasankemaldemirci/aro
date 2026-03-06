@@ -27,6 +27,7 @@ ${chalk.bold("Commands:")}
   ${chalk.cyan("badge")}       Generate or update ARO Badge in your README (--update)
   ${chalk.cyan("rules")}       Generate .cursorrules / .windsurfrules for AI Agents
   ${chalk.cyan("init-ci")}     Set up GitHub Actions safety gate (ARO CI/CD)
+  ${chalk.cyan("init-hooks")}  Set up Git pre-commit hooks
   ${chalk.cyan("mcp")}         Start ARO Model Context Protocol (MCP) Server
   ${chalk.cyan("help")}        Show this help message
 
@@ -69,6 +70,11 @@ ${chalk.bold("Example:")}
       case "init-ci": {
         const init = await import(path.join(BASE_PATH, "init"));
         await init.run();
+        break;
+      }
+      case "init-hooks": {
+        const hooks = await import(path.join(BASE_PATH, "hooks"));
+        await hooks.run();
         break;
       }
       case "mcp": {

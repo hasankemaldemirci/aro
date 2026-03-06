@@ -90,6 +90,8 @@ export function analyzeMetrics(
     hasAIMap: false,
     contextFiles: [],
     blindSpots: [],
+    highComplexityFiles: 0,
+    anyTypeUsage: 0,
   };
 
   const readmePath = path.join(projectPath, "README.md");
@@ -184,6 +186,21 @@ export function analyzeMetrics(
       metrics.largeFiles++;
     }
 
+    // Complexity approximation (cyclomatic complexity proxy)
+    const complexityMatches = content.match(/\b(if|for|while|switch|catch)\b/g);
+    const complexityScore = complexityMatches ? complexityMatches.length : 0;
+    if (complexityScore > 20) {
+      metrics.highComplexityFiles++;
+    }
+
+    // TypeScript "any" type detection
+    if (file.endsWith(".ts") || file.endsWith(".tsx")) {
+      const anyMatches = content.match(/:\s*any\b/g);
+      if (anyMatches) {
+        metrics.anyTypeUsage += anyMatches.length;
+      }
+    }
+
     // Security check (Basic detection for AI-gen risks)
     SECURITY_KEYWORDS.forEach((key) => {
       if (content.includes(key + "=") || content.includes(key + ":")) {
@@ -207,6 +224,18 @@ export function analyzeMetrics(
   if (metrics.securityIssues > 0) {
     metrics.blindSpots.push(
       `${metrics.securityIssues} potential security/hallucination risks (hardcoded keys or dangerous functions) detected.`,
+    );
+  }
+
+  if (metrics.highComplexityFiles > 0) {
+    metrics.blindSpots.push(
+      `${metrics.highComplexityFiles} highly complex files detected - Deeply nested logic confuses AI models.`,
+    );
+  }
+
+  if (metrics.anyTypeUsage > 10) {
+    metrics.blindSpots.push(
+      `Heavy usage of 'any' type (${metrics.anyTypeUsage} times) - Reduces TypeScript context for AI inference.`,
     );
   }
 

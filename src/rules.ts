@@ -49,10 +49,20 @@ You are working in a codebase optimized by **ARO**. To maintain a 100/100 Readin
 `.trim();
 
   try {
-    const rulesFiles = [".cursorrules", ".windsurfrules", "AI-CONSTITUTION.md"];
+    const rulesFiles = [
+      ".cursorrules",
+      ".windsurfrules",
+      "AI-CONSTITUTION.md",
+      path.join(".github", "copilot-instructions.md"),
+    ];
 
     rulesFiles.forEach((file) => {
-      fs.writeFileSync(path.join(projectPath, file), rulesContent);
+      const fullPath = path.join(projectPath, file);
+      const dir = path.dirname(fullPath);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      fs.writeFileSync(fullPath, rulesContent);
     });
 
     console.log(Branding.border(""));
@@ -64,7 +74,7 @@ You are working in a codebase optimized by **ARO**. To maintain a 100/100 Readin
     );
     console.log(
       Branding.gray(
-        "\nTargeting: Cursor, Windsurf, Devin, and any ARO-compatible AI Agent.",
+        "\nTargeting: Cursor, Windsurf, Copilot, Devin, and any ARO-compatible AI Agent.",
       ),
     );
     console.log(Branding.border(""));

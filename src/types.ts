@@ -14,6 +14,8 @@ export interface AROMetrics {
   hasAIMap: boolean;
   contextFiles: { name: string; size: number; score: number }[];
   blindSpots: string[];
+  highComplexityFiles: number;
+  anyTypeUsage: number;
 }
 
 export interface AROContext {

@@ -14,6 +14,8 @@ describe("ARO Enterprise Analytics", () => {
       hasAIMap: false,
       contextFiles: [],
       blindSpots: [],
+      highComplexityFiles: 0,
+      anyTypeUsage: 0,
     };
     const debt = calculateDebt(metrics);
     expect(debt.totalDebt).toBe(0);
@@ -34,6 +36,8 @@ describe("ARO Enterprise Analytics", () => {
       hasAIMap: false,
       contextFiles: [],
       blindSpots: [],
+      highComplexityFiles: 0,
+      anyTypeUsage: 0,
     };
     const debt = calculateDebt(metrics);
     expect(debt.docDebt).toBe(15000);
@@ -52,6 +56,8 @@ describe("ARO Enterprise Analytics", () => {
       hasAIMap: false,
       contextFiles: [],
       blindSpots: [],
+      highComplexityFiles: 0,
+      anyTypeUsage: 0,
     };
     const debt = calculateDebt(metrics);
     expect(debt.docDebt).toBe(6000);
@@ -69,6 +75,8 @@ describe("ARO Enterprise Analytics", () => {
       hasAIMap: false,
       contextFiles: [],
       blindSpots: [],
+      highComplexityFiles: 0,
+      anyTypeUsage: 0,
     };
     const debt = calculateDebt(metrics);
     expect(debt.docDebt).toBe(3000);
@@ -86,6 +94,8 @@ describe("ARO Enterprise Analytics", () => {
       hasAIMap: false,
       contextFiles: [],
       blindSpots: [],
+      highComplexityFiles: 0,
+      anyTypeUsage: 0,
     };
     const debt = calculateDebt(metrics);
     expect(debt.truncationDebt).toBe(15000); // 3 * 5000
@@ -103,6 +113,8 @@ describe("ARO Enterprise Analytics", () => {
       hasAIMap: false,
       contextFiles: [],
       blindSpots: [],
+      highComplexityFiles: 0,
+      anyTypeUsage: 0,
     };
     const debt = calculateDebt(metrics);
     expect(debt.structuralDebt).toBe(20000); // 10000 (no src) + (2 * 5000) (missing 2 configs)
@@ -120,6 +132,8 @@ describe("ARO Enterprise Analytics", () => {
       hasAIMap: false,
       contextFiles: [],
       blindSpots: [],
+      highComplexityFiles: 0,
+      anyTypeUsage: 0,
     };
     const debt = calculateDebt(metrics);
     expect(debt.structuralDebt).toBe(0); // Target met with 2 configs
@@ -137,6 +151,8 @@ describe("ARO Enterprise Analytics", () => {
       hasAIMap: true, // Compensation
       contextFiles: [],
       blindSpots: [],
+      highComplexityFiles: 0,
+      anyTypeUsage: 0,
     };
     const debt = calculateDebt(metrics);
     expect(debt.truncationDebt).toBe(0);
