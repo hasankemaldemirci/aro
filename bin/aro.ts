@@ -8,8 +8,9 @@
 
 import path from "path";
 import chalk from "chalk";
-
-const VERSION = "v2.1.0";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { version } = require(path.join(__dirname, "../../package.json"));
+const VERSION = `v${version}`;
 const BASE_PATH = path.join(__dirname, "../src");
 
 async function main() {
