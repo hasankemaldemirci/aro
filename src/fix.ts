@@ -43,7 +43,7 @@ export async function run(context: AROContext): Promise<void> {
     } else if (spot.includes("No dedicated Agent instructions")) {
       runRules();
       applied.push(
-        "Generated .cursorrules, .windsurfrules, AI-CONSTITUTION.md, copilot-instructions.md",
+        "Generated .cursorrules, .windsurfrules, AI-CONSTITUTION.md, CLAUDE.md, copilot-instructions.md",
       );
     } else if (spot.includes("large files detected")) {
       await runRefactor({ apply: true });
