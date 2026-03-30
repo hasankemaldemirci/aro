@@ -22,7 +22,7 @@ ${chalk.bold("Usage:")}
   npx @agent-aro/cli <command> [options]
 
 ${chalk.bold("Commands:")}
-  ${chalk.cyan("audit")}       Full analysis & AI-Debt calculation. Options: --silent
+  ${chalk.cyan("audit")}       Full analysis & AI-Debt calculation. Options: --silent, --fix, --threshold=N
   ${chalk.cyan("refactor")}    Analyze large files and suggest intelligent splitting strategies
   ${chalk.cyan("badge")}       Generate or update ARO Badge in your README (--update)
   ${chalk.cyan("rules")}       Generate .cursorrules / .windsurfrules for AI Agents

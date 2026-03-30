@@ -146,6 +146,11 @@ export async function run(): Promise<AROContext | void> {
       }
     }
 
+    if (process.argv.includes("--fix")) {
+      const { run: applyFixes } = await import("./fix");
+      await applyFixes(contextMap);
+    }
+
     return contextMap;
   } catch (e: any) {
     handleError(`Analysis failed: ${e.message}`);
