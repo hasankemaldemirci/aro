@@ -24,6 +24,7 @@ ${chalk.bold("Usage:")}
 
 ${chalk.bold("Commands:")}
   ${chalk.cyan("audit")}       Full analysis & AI-Debt calculation. Options: --silent, --fix, --threshold=N
+  ${chalk.cyan("benchmark")}   Test AI discoverability before/after context files (no API key needed)
   ${chalk.cyan("refactor")}    Analyze large files and suggest intelligent splitting strategies
   ${chalk.cyan("badge")}       Generate or update ARO Badge in your README (--update)
   ${chalk.cyan("rules")}       Generate .cursorrules / .windsurfrules for AI Agents
@@ -76,6 +77,11 @@ ${chalk.bold("Example:")}
       case "init-hooks": {
         const hooks = await import(path.join(BASE_PATH, "hooks"));
         await hooks.run();
+        break;
+      }
+      case "benchmark": {
+        const benchmark = await import(path.join(BASE_PATH, "benchmark"));
+        await benchmark.run();
         break;
       }
       case "mcp": {

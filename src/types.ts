@@ -46,3 +46,16 @@ export interface ARODebt {
   totalDebt: number;
   wastedHours: number;
 }
+
+export interface BenchmarkCheckContext {
+  readmeContent: string;
+  packageJson: any;
+  contextFilesContent: string;
+  includeContextFiles: boolean;
+}
+
+export interface BenchmarkResult {
+  label: string;
+  before: boolean;
+  after: boolean;
+}
