@@ -11,7 +11,7 @@
   "entryPoints": [
     "bin/aro.ts"
   ],
-  "analyzedAt": "2026-03-30T10:45:36.989Z",
+  "analyzedAt": "2026-03-30T12:11:14.309Z",
   "metrics": {
     "hasReadme": true,
     "readmeSize": 3629,
@@ -25,12 +25,12 @@
       {
         "name": "AGENTS.md",
         "size": 2830,
-        "score": 100
+        "score": 95
       },
       {
         "name": "CLAUDE.md",
         "size": 1604,
-        "score": 100
+        "score": 85
       }
     ],
     "blindSpots": [

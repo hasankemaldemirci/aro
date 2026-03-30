@@ -19,8 +19,28 @@ export function scoreReadmeContent(content: string): number {
   // 2. Has installation instructions
   if (/install|setup|getting started|kurulum/i.test(content)) score += 20;
 
-  // 3. Has at least one code block (commands/examples)
-  if (/```/.test(content)) score += 20;
+  // 3. Has at least one code block with real content (not just placeholder comments)
+  // Uses char code 96 (backtick) to avoid issues with template literal parsing.
+  const FENCE = String.fromCharCode(96, 96, 96);
+  const segments = content.split(FENCE);
+  let hasRealCodeBlock = false;
+  // Odd-indexed segments are inside code blocks (opening fence, content, closing fence alternates)
+  for (let i = 1; i < segments.length; i += 2) {
+    const blockBody = segments[i].slice(segments[i].indexOf("\n") + 1);
+    const realLines = blockBody
+      .split("\n")
+      .filter(
+        (l) =>
+          l.trim().length > 2 &&
+          !l.trim().startsWith("#") &&
+          !l.trim().startsWith("//"),
+      );
+    if (realLines.length > 0) {
+      hasRealCodeBlock = true;
+      break;
+    }
+  }
+  if (hasRealCodeBlock) score += 20;
 
   // 4. Has usage / example section
   if (/usage|example|kullanım|örnek/i.test(content)) score += 20;

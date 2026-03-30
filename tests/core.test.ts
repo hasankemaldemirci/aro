@@ -92,10 +92,16 @@ Here is an example of how to use the project.
       expect(score).toBe(40);
     });
 
-    test("should reward code blocks", () => {
+    test("should reward code blocks with real content", () => {
       const content = "# Proj\n```bash\nnpm start\n```";
       // title(15) + code block(20) = 35
       expect(scoreReadmeContent(content)).toBe(35);
+    });
+
+    test("should not reward placeholder-only code blocks", () => {
+      const content = "# Proj\n```bash\n# run command here\n```";
+      // title(15) only — comment-only code block does not count as real content
+      expect(scoreReadmeContent(content)).toBe(15);
     });
   });
 

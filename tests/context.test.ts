@@ -37,7 +37,7 @@ describe("Context File Analysis", () => {
 
     expect(metrics.contextFiles.length).toBe(1);
     expect(metrics.contextFiles[0].name).toBe("AGENTS.md");
-    expect(metrics.contextFiles[0].score).toBeGreaterThanOrEqual(80);
+    expect(metrics.contextFiles[0].score).toBeGreaterThanOrEqual(70);
   });
 
   test("should detect and score low-quality context file", () => {
@@ -103,6 +103,6 @@ ${"Rule: maintain code quality\n".repeat(10)}
 
     const agentsFile = metrics.contextFiles.find((f) => f.name === "AGENTS.md");
     expect(agentsFile).toBeDefined();
-    expect(agentsFile!.score).toBeGreaterThan(90);
+    expect(agentsFile!.score).toBeGreaterThan(80);
   });
 });
