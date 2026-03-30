@@ -11,13 +11,13 @@ import { loadIgnoreList } from "./utils";
  * Does NOT modify files - only analyzes and reports.
  */
 
-export async function run() {
+export async function run(options?: { apply?: boolean }) {
   const projectPath = process.cwd();
   const contextPath = path.join(projectPath, ".agent_context_pro.json");
   const ignoreList = loadIgnoreList(projectPath);
 
-  // Check for --apply flag
-  const shouldApply = process.argv.includes("--apply");
+  // Check for --apply flag (from CLI arg or programmatic options)
+  const shouldApply = options?.apply ?? process.argv.includes("--apply");
 
   if (!fs.existsSync(contextPath)) {
     console.log(
